@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/HiTextView"
-        android:text="Hi!"
+        android:text="Hi! Sabar ya, masih lagi dikerjain kok ini."
         android:textSize="20sp" />
 
     <LinearLayout

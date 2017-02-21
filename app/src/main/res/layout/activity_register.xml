@@ -32,7 +32,7 @@
         android:ems="10"
         android:layout_marginTop="149dp"
         android:id="@+id/EmailTextFieldRegister"
-        android:hint="Your e-mail"
+        android:hint="E-mail"
         android:fontFamily="serif"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -65,6 +65,7 @@
 
     <Button
         android:text="Register"
+        android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.AppCompat.Button.Colored"
@@ -76,6 +77,8 @@
 
     <TextView
         android:text="Already register? Log in here"
+        android:textColor="#45320d"
+        android:fontFamily="serif"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
