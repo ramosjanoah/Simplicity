@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void goRegister(View view) {
+        finish();
         Intent toRegisterScreen = new Intent(this, RegisterActivity.class);
         startActivity(toRegisterScreen);
     }
@@ -60,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view == buttonLogIn) {
+            finish();
             userLogIn();
         }
     }

@@ -27,8 +27,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
-    private TextView textViewRegister;
 
+    private TextView AlreadyRegister;
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
@@ -42,16 +42,16 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         progressDialog = new ProgressDialog(this);
         buttonRegister = (Button) findViewById(R.id.RegisterButtonRegister);
         editTextEmail = (EditText) findViewById(R.id.EmailTextFieldRegister);
-        editTextPassword = (EditText) findViewById(R.id.ConfirmPassword);
+        editTextPassword = (EditText) findViewById(R.id.PasswordTextField);
         editTextConfirmPassword = (EditText) findViewById(R.id.ConfirmPassword);
-        textViewRegister = (TextView) findViewById(R.id.RegisterLabel);
-        buttonRegister.setOnClickListener(this);
+        AlreadyRegister = (TextView) findViewById(R.id.AlreadyRegister);
 
+        buttonRegister.setOnClickListener(this);
+        AlreadyRegister.setOnClickListener(this);
         firebaseAuth = FirebaseAuth.getInstance();
-        //textViewRegister.setOnClickListener(this);
     }
 
-    public void goLogin(View view) {
+    public void goLogin() {
         Intent toLoginScreen = new Intent(this, LoginActivity.class);
         startActivity(toLoginScreen);
     }
@@ -60,6 +60,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         if (view == buttonRegister) {
             registerUser();
+        } else if (view == AlreadyRegister) {
+            finish();
+            goLogin();
         }
     }
 
@@ -67,6 +70,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         String confirmPassword = editTextConfirmPassword.getText().toString().trim();
+        System.out.println("xxxxx1");
+        System.out.println(email + ", " + password + ", " + confirmPassword );
 
         if (TextUtils.isEmpty(email)) {
             // Kalo email kosong?
@@ -81,10 +86,12 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         }
 
         if (!(confirmPassword.equals(password))) {
-            // Kalo password kosong?
+            // Kalo confirm password gagal
             Toast.makeText(this, "Please confirm your password correcty", Toast.LENGTH_SHORT);
             return;
         }
+
+        System.out.println("xxxxx2");
 
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
@@ -106,8 +113,5 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                     }
 
                 });
-
-
-
     }
 }

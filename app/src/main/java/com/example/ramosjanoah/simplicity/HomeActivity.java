@@ -31,6 +31,7 @@ public class HomeActivity extends Activity implements OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("onCreate: HomeActivity.java");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         firebaseAuth = FirebaseAuth.getInstance();

@@ -30,7 +30,7 @@
         android:inputType="textPassword"
         android:ems="10"
         android:layout_marginTop="22dp"
-        android:id="@+id/editText"
+        android:id="@+id/PasswordTextField"
         android:layout_below="@+id/EmailTextFieldRegister"
         android:layout_alignLeft="@+id/EmailTextFieldRegister"
         android:layout_alignStart="@+id/EmailTextFieldRegister"
@@ -44,8 +44,7 @@
         android:layout_below="@+id/RegisterButtonRegister"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
-        android:id="@+id/AlreadyRegister"
-        android:onClick="goLogin" />
+        android:id="@+id/AlreadyRegister" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -54,10 +53,10 @@
         android:ems="10"
         android:layout_marginTop="16dp"
         android:id="@+id/ConfirmPassword"
-        android:hint=" "
-        android:layout_below="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText"
+        android:hint="Confirm Password"
+        android:layout_below="@+id/PasswordTextField"
+        android:layout_alignLeft="@+id/PasswordTextField"
+        android:layout_alignStart="@+id/PasswordTextField"
         android:fontFamily="serif" />
 
     <EditText
@@ -72,26 +71,13 @@
         android:layout_below="@+id/RegisterLabel"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editText3"
-        android:hint="Confirm your password"
-        android:fontFamily="serif"
-        android:layout_alignBaseline="@+id/ConfirmPassword"
-        android:layout_alignBottom="@+id/ConfirmPassword"
-        android:layout_alignLeft="@+id/ConfirmPassword"
-        android:layout_alignStart="@+id/ConfirmPassword" />
-
     <Button
         android:text="Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/RegisterButtonRegister"
-        android:onClick="goRegister"
+        android:onClick="goRegister (LoginActivity)"
         android:layout_marginTop="33dp"
         android:layout_below="@+id/ConfirmPassword"
         android:layout_centerHorizontal="true" />
