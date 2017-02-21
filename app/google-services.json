@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "909554197384",
+    "firebase_url": "https://simplicity-f2cf3.firebaseio.com",
+    "project_id": "simplicity-f2cf3",
+    "storage_bucket": "simplicity-f2cf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909554197384:android:71ec07e2b666533b",
+        "android_client_info": {
+          "package_name": "com.example.ramosjanoah.simplicity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909554197384-s4dr9e6nqq67unqp0hqm8b0cpqe42omg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYAGIToUY1neoIPxWsqbGzRTIj83cc1ow"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

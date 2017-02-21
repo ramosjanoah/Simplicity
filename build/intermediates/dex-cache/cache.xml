@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.0.1_071492bb3a5637454a78a291958a341a5c8a5199.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.0.1_3ac89ecc158dc04b68bb973f0175622c08e60cd0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.0.1_419cfcdc31db6423e8d13e213aa4a3564eb6de56.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.0.1_f7ef1573fcc9769d66cdd99aac78bada756fabe1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_f17c9f744a15c80dd9db536146a1fab295f1ba3e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.0.1_4eccbee7c3f85cd025f6f67ac718870952306624.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\10.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="1ac56e5801e986583cbe27f2cce57f626cc7ff93">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-10.2.0_5c394f0c2879bad9859b5a1b1fdf29342e28b277.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.google.firebase\firebase-auth\10.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="48532a016bb0dfbe7970c147ce784598a515406b">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-auth-10.2.0_0f48505d0939bfc6ff6a89637f885e4619ba4c1d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_2223ac6e7f213ba5af9444c5687859083238f432.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.0.1_d6117d2503aaeee2c9d32f4791afe7db91b5060a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_4f27a34cc055241283ffebbe2ac3963677fd3bfb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f83b00041ecfba705603fec40363416c7de69719">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_51fe22fa5f6402a3b0816fd0e3db34e3293d676e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.0.1_f95bf4bc1db637bf887e509ee2b70a5d18ba2051.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\10.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="0d5cbbbfe040201c7569478b70a13b58fd11aab4">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-common-10.2.0_78a65fb65dac7f3dae9d8ac9c09260d704403acc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\10.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="3d13e510077b35fe8e49930a627dd849ad5da0dc">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-10.2.0_4e17b2359c88d42702b98e4dd8a68bae6a4b4677.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\10.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="ce9112e08a027c8620ae693983e38cdbb9f6371b">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-analytics-impl-10.2.0_56d894734d60e203e2da125e524fdee6167a8e38.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.1_ec21906f06795f0fbda29d550b03f8255d5917bd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\10.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="bd75f9f0296fe220da6d0ad961831b04541c4452">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-tasks-10.2.0_e612ab315f1eaf235106008b228f1efd9a284fd3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\support-annotations-25.0.1_2ccaa214a05fb84a0dbb3fd25440770c6019de6a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\10.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="3d6951cb416ebf8c66a32b9480808ca247b68344">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-iid-10.2.0_6a9d385665615abd029af08a38618b8a98e9a1bf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\10.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="a61e7010aa7be5da53cd1bc5279630510c9a4912">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-analytics-10.2.0_9706150299e8bc7a357b88a3cebc9a76edba07b6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.0.1_988d66d73802ac70c8eaed4615d8879cac35705b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="C:\Users\ramosjanoah\Desktop\Berantakan\PBD1\Simplicity\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.0.1_0c1d6dfd27b2da3e7ffb2f323c20fcd98af1a353.jar" />
+    </item>
+
+</items>
