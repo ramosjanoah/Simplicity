@@ -7,11 +7,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/logo3"
     tools:context="com.example.ramosjanoah.simplicity.LoginActivity"
     android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
     android:layout_width="match_parent">
 
+    <!--
     <TextView
         android:text="Register to Simplicity"
         android:layout_width="wrap_content"
@@ -22,7 +23,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp"
         android:fontFamily="serif" />
+    -->
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:layout_marginTop="149dp"
+        android:id="@+id/EmailTextFieldRegister"
+        android:hint="Your e-mail"
+        android:fontFamily="serif"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -35,16 +48,7 @@
         android:layout_alignLeft="@+id/EmailTextFieldRegister"
         android:layout_alignStart="@+id/EmailTextFieldRegister"
         android:fontFamily="serif"
-        android:hint="New password" />
-
-    <TextView
-        android:text="Already register? Log in here"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/RegisterButtonRegister"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:id="@+id/AlreadyRegister" />
+        android:hint="Password" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -59,18 +63,6 @@
         android:layout_alignStart="@+id/PasswordTextField"
         android:fontFamily="serif" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:layout_marginTop="38dp"
-        android:id="@+id/EmailTextFieldRegister"
-        android:hint="Your e-mail"
-        android:fontFamily="serif"
-        android:layout_below="@+id/RegisterLabel"
-        android:layout_centerHorizontal="true" />
-
     <Button
         android:text="Register"
         android:layout_width="wrap_content"
@@ -78,8 +70,18 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/RegisterButtonRegister"
         android:onClick="goRegister (LoginActivity)"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/ConfirmPassword"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Already register? Log in here"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:id="@+id/AlreadyRegister"
+        android:layout_below="@+id/RegisterButtonRegister"
         android:layout_centerHorizontal="true" />
 
 
