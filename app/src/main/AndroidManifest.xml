@@ -15,15 +15,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity android:name=".HomeActivity"
-            android:theme="@style/AppTheme"/>
-
-        <activity android:name=".RegisterActivity"
-            android:theme="@style/AppTheme"/>
-
-        <activity android:name=".ImgActivity"
-            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ImgActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".EditProfile"></activity>
     </application>
 
 </manifest>

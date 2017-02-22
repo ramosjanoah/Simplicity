@@ -90,6 +90,10 @@ public class HomeActivity extends Activity implements OnClickListener{
         }
     }
 
+    public void editProfile(View view) {
+        Intent toLoginScreen = new Intent(this, EditProfile.class);
+        startActivity(toLoginScreen);
+    }
 }
 
 
