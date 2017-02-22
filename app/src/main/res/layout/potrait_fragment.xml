@@ -3,25 +3,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="left"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:id="@+id/potrait_fragment">
+    <!--android:gravity="left"-->
 
-    <!--
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/landscape_fragment" />
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/potrait_fragment" />
-
-    -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/HiTextView"
-        android:text="Hi! Sabar ya, masih lagi dikerjain kok ini."
+        android:text="Potrait!!"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -34,5 +24,5 @@
         android:layout_width="346dp"
         android:layout_height="wrap_content"
         android:id="@+id/ButtonLogOut" />
-    
+
 </LinearLayout>
