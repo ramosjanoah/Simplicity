@@ -78,5 +78,16 @@
         android:layout_alignLeft="@+id/ConfirmPassword"
         android:layout_alignStart="@+id/ConfirmPassword" />
 
+    <Button
+        android:text="Test Gallery"
+        android:textColor="#FFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:id="@+id/toGallery"
+        android:layout_below="@+id/DoNotHaveAccount"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

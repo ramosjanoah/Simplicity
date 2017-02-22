@@ -100,5 +100,4 @@
         android:layout_below="@+id/Nationality"
         android:layout_centerHorizontal="true" />
 
-
 </RelativeLayout>
