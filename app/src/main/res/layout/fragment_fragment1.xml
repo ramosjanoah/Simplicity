@@ -1,0 +1,82 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ramosjanoah.simplicity.Fragment1">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--
+        <TextView
+        android:text="Health"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EmailTextView"
+        android:layout_marginTop="14dp"
+        android:id="@+id/HealthTextView" />
+
+        <TextView
+        android:text="Muscle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/MuscleTextView"
+        android:layout_below="@+id/HealthTextView" />
+        -->
+
+        <TextView
+            android:text="UID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:id="@+id/UidTextView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="124dp"
+            android:layout_marginEnd="124dp" />
+
+        <TextView
+        android:text="Fullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:id="@+id/FullnameTextView"
+            android:layout_below="@+id/UidTextView"
+            android:layout_alignLeft="@+id/UidTextView"
+            android:layout_alignStart="@+id/UidTextView" />
+
+        <TextView
+            android:text="Email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:id="@+id/EmailTextView"
+            android:layout_below="@+id/FullnameTextView"
+            android:layout_alignLeft="@+id/FullnameTextView"
+            android:layout_alignStart="@+id/FullnameTextView" />
+
+        <TextView
+            android:text="Nationality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/NationalityTextView"
+            android:layout_below="@+id/EmailTextView"
+            android:layout_alignLeft="@+id/EmailTextView"
+            android:layout_alignStart="@+id/EmailTextView"
+            android:layout_marginTop="17dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ButtonEditProfile"
+            android:text="Edit Profile"
+            android:onClick="editProfile"
+            android:layout_marginTop="21dp"
+            android:layout_below="@+id/NationalityTextView"
+            android:layout_alignLeft="@+id/NationalityTextView"
+            android:layout_alignStart="@+id/NationalityTextView" />
+    </RelativeLayout>
+</FrameLayout>
