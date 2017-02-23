@@ -14,82 +14,92 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_marginTop="55dp"
+        android:hint="My Nationality"
+        android:gravity="left"
+        android:fontFamily="serif"
+        android:id="@+id/editNationality"
+        android:layout_marginBottom="62dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_alignBottom="@+id/buttonSaveEdit"
+        android:layout_alignLeft="@+id/buttonSaveEdit"
+        android:layout_alignStart="@+id/buttonSaveEdit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nationality"
+        android:fontFamily="serif"
+        android:ems="5"
+        android:textSize="18dp"
+        android:id="@+id/textView4"
+        android:layout_alignBaseline="@+id/editNationality"
+        android:layout_alignBottom="@+id/editNationality"
+        android:layout_toLeftOf="@+id/buttonSaveEdit"
+        android:layout_toStartOf="@+id/buttonSaveEdit" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
         android:hint="My Name"
         android:gravity="left"
         android:fontFamily="serif"
-        android:layout_alignParentRight="true"
-        android:id="@+id/editName" />
+        android:id="@+id/editName"
+        android:layout_above="@+id/editEmail"
+        android:layout_alignLeft="@+id/editEmail"
+        android:layout_alignStart="@+id/editEmail" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
-        android:ems="10"
-        android:layout_marginTop="55dp"/>
+        android:fontFamily="serif"
+        android:ems="5"
+        android:textSize="18dp"
+        android:id="@+id/textView"
+        android:layout_alignBaseline="@+id/editName"
+        android:layout_alignBottom="@+id/editName"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:fontFamily="serif"
+        android:ems="5"
+        android:textSize="18dp"
+        android:id="@+id/textView2"
+        android:layout_alignBaseline="@+id/editEmail"
+        android:layout_alignBottom="@+id/editEmail"
+        android:layout_toLeftOf="@+id/editNationality"
+        android:layout_toStartOf="@+id/editNationality" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_marginTop="105dp"
-        android:hint="My Gender"
+        android:hint="My Email"
+        android:textSize="18dp"
         android:gravity="left"
         android:fontFamily="serif"
-        android:layout_alignParentRight="true"
-        android:id="@+id/editGender" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gender"
-        android:ems="10"
-        android:layout_marginTop="105dp"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_marginTop="155dp"
-        android:hint="My Religion"
-        android:gravity="left"
-        android:fontFamily="serif"
-        android:layout_alignParentRight="true"
-        android:id="@+id/editGender" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Religion"
-        android:ems="10"
-        android:layout_marginTop="155dp"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_marginTop="205dp"
-        android:hint="My Race"
-        android:gravity="left"
-        android:fontFamily="serif"
-        android:layout_alignParentRight="true"
-        android:id="@+id/editGender" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Race"
-        android:ems="10"
-        android:layout_marginTop="205dp"/>
+        android:id="@+id/editEmail"
+        android:layout_above="@+id/editNationality"
+        android:layout_alignLeft="@+id/editNationality"
+        android:layout_alignStart="@+id/editNationality"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <Button
         android:text="Save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editGender"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="55dp"
-        android:id="@+id/buttonSaveEdit" />
+        android:id="@+id/buttonSaveEdit"
+        android:layout_marginBottom="233dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

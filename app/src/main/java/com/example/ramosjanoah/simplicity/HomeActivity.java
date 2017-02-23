@@ -1,8 +1,11 @@
 package com.example.ramosjanoah.simplicity;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,8 +49,37 @@ public class HomeActivity extends Activity implements OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("onCreate: HomeActivity.java");
+        //super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_home);
+
+        //fragments view
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        // Allows you to interact with Fragments in an Activity
+        FragmentManager fragmentManager = getFragmentManager();
+        // beginTransaction() begins the FragmentTransaction which allows you to
+        // add, attach, detach, hide, remove, replace, animate, transition or
+        // show fragments
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        // The Configuration object provides device configuration info
+        // http://developer.android.com/reference/android/content/res/Configuration.html
+        Configuration configInfo = getResources().getConfiguration();
+
+        // Depending on the screen orientation replace with the correct fragment
+        if(configInfo.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            setContentView(R.layout.landscape_fragment);
+            //FragmentLandscape fragmentLandscape = new FragmentLandscape();
+            //fragmentTransaction.replace(android.R.id.content,fragmentLandscape);
+        } else {
+            setContentView(R.layout.activity_home);
+            //FragmentPotrait fragmentPortrait = new FragmentPotrait();
+            //fragmentTransaction.replace(android.R.id.content,fragmentPortrait);
+        }
+        // Schedule for the replacement of the Fragment as soon as possible
+        fragmentTransaction.commit();
+
+        // setContentView(R.layout.activity_my);
+
         firebaseAuth = FirebaseAuth.getInstance();
         buttonLogout = (Button) findViewById(R.id.ButtonLogOut);
         TextViewUid = (TextView) findViewById(R.id.UidTextView);
@@ -67,8 +99,8 @@ public class HomeActivity extends Activity implements OnClickListener{
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    //GetProfile getProfile = new GetProfile();
-                    //getProfile.execute();
+                    GetProfile getProfile = new GetProfile();
+                    getProfile.execute();
 
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -95,7 +127,9 @@ public class HomeActivity extends Activity implements OnClickListener{
         textViewUserEmail.setText("Hi, " + firebaseAuth.getCurrentUser().getEmail() + "!");
 
         buttonLogout.setOnClickListener(this);
+
     }
+
 
     @Override
     public void onClick(View view) {
@@ -168,6 +202,7 @@ public class HomeActivity extends Activity implements OnClickListener{
             printUserProfile();
         }
     }
+
 }
 
 

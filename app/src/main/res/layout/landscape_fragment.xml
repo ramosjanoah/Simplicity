@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
@@ -7,7 +7,11 @@
     android:padding="20dp"
     android:id="@+id/landscape_fragment">
     <!--android:gravity="left"-->
-
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,10 +19,14 @@
         android:text="Landscape!!"
         android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"></LinearLayout>
+        android:id="@+id/ButtonEditProfile"
+        android:layout_marginTop="105dp"
+        android:layout_below="@+id/HiTextView"
+        android:text="Edit Profile"
+        android:onClick="editProfile"/>
 
     <Button
         android:text="Log Out"
@@ -28,6 +36,69 @@
         android:layout_below="@+id/HiTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="18dp" />
+        android:layout_marginTop="28dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-</RelativeLayout>
+    <TextView
+        android:text="Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FullnameTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="12dp"
+        android:id="@+id/EmailTextView" />
+
+    <TextView
+        android:text="Health"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EmailTextView"
+        android:layout_toRightOf="@+id/linearLayout"
+        android:layout_toEndOf="@+id/linearLayout"
+        android:layout_marginTop="14dp"
+        android:id="@+id/HealthTextView" />
+
+    <TextView
+        android:text="Nationality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/NationalityTextView"
+        android:layout_below="@+id/MuscleTextView"
+        android:layout_toRightOf="@+id/linearLayout"
+        android:layout_toEndOf="@+id/linearLayout"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:text="Muscle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/MuscleTextView"
+        android:layout_below="@+id/HealthTextView"
+        android:layout_toRightOf="@+id/linearLayout"
+        android:layout_toEndOf="@+id/linearLayout" />
+
+    <TextView
+        android:text="UID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:id="@+id/UidTextView"
+        android:layout_below="@+id/ButtonEditProfile"
+        android:layout_toRightOf="@+id/linearLayout"
+        android:layout_toEndOf="@+id/linearLayout" />
+
+    <TextView
+        android:text="Fullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:id="@+id/FullnameTextView"
+        android:layout_below="@+id/UidTextView"
+        android:layout_toRightOf="@+id/linearLayout"
+        android:layout_toEndOf="@+id/linearLayout" />
+
+    </RelativeLayout>
+</ScrollView>
