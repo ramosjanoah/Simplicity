@@ -36,7 +36,6 @@ public class ImgActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.img_test);
 
-
         locTxt = (TextView) findViewById(R.id.testLocation);
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         String locationProvider = LocationManager.NETWORK_PROVIDER;
@@ -63,11 +62,8 @@ public class ImgActivity extends AppCompatActivity{
         } catch (NullPointerException e) {
             // Handle NullPointerException
         }
-
-
-
+        //End Geocoder
         galleryBtn = (Button) findViewById(R.id.testGallery);
-
         galleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
