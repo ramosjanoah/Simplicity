@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,6 +27,7 @@
         android:id="@+id/MuscleTextView"
         android:layout_below="@+id/HealthTextView" />
         -->
+
 
         <TextView
             android:text="UID"
@@ -73,10 +75,33 @@
             android:layout_height="wrap_content"
             android:id="@+id/ButtonEditProfile"
             android:text="Edit Profile"
+            android:textSize="10dp"
             android:onClick="editProfile"
             android:layout_marginTop="21dp"
             android:layout_below="@+id/NationalityTextView"
             android:layout_alignLeft="@+id/NationalityTextView"
             android:layout_alignStart="@+id/NationalityTextView" />
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:srcCompat="@drawable/no_ava"
+            android:layout_marginLeft="53dp"
+            android:layout_marginStart="53dp"
+            android:id="@+id/imageView"
+            android:layout_alignTop="@+id/UidTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:text="CHANGE PICTURE"
+            android:textSize="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonPicture"
+            android:layout_alignBaseline="@+id/ButtonEditProfile"
+            android:layout_alignBottom="@+id/ButtonEditProfile"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_alignEnd="@+id/imageView" />
     </RelativeLayout>
 </FrameLayout>
