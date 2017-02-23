@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void goImageTest(View view) {
-        finish();
         Intent toGalleryScreen = new Intent(this, ImgActivity.class);
         startActivity(toGalleryScreen);
     }
