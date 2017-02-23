@@ -3,6 +3,7 @@ package com.example.ramosjanoah.simplicity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -17,6 +18,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 
 /**
  * Created by ramosjanoah on 2/18/2017.
@@ -114,4 +119,29 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
 
                 });
     }
+    /*
+    public class GetProfile extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog.setTitle("Loading user profile..");
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.hide();
+            printUserProfile();
+        }*/
 }

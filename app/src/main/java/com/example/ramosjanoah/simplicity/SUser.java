@@ -152,6 +152,7 @@ public class SUser {
         muscle = obj.getInt("muscle");
         email = obj.getString("email");
     }
+
     public void writeUser() throws IOException, JSONException, URISyntaxException {
         String urllink = "https://ramosjanoah.herokuapp.com/insert.php";
         URL url = new URL(urllink);
