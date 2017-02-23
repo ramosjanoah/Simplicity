@@ -1,7 +1,9 @@
 package com.example.ramosjanoah.simplicity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -9,10 +11,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 
 import static com.google.android.gms.internal.zzt.TAG;
 
@@ -24,10 +31,17 @@ public class HomeActivity extends Activity implements OnClickListener{
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
     private String email;
     private TextView textViewUserEmail;
     private Button buttonLogout;
+    private TextView TextViewUid;
+    private TextView TextViewFullname;
+    private TextView TextViewEmail;
+    private TextView TextViewMuscle;
+    private TextView TextViewHealth;
+    private TextView TextViewNationality;
+    private SUser CurrentUserProfile;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +51,18 @@ public class HomeActivity extends Activity implements OnClickListener{
         firebaseAuth = FirebaseAuth.getInstance();
         buttonLogout = (Button) findViewById(R.id.ButtonLogOut);
 
+
+
+        TextViewUid = (TextView) findViewById(R.id.UidTextView);
+        TextViewFullname = (TextView) findViewById(R.id.FullnameTextView);
+        TextViewEmail = (TextView) findViewById(R.id.EmailTextView);
+        TextViewMuscle = (TextView) findViewById(R.id.MuscleTextView);
+        TextViewHealth = (TextView) findViewById(R.id.HealthTextView);
+        TextViewNationality = (TextView) findViewById(R.id.NationalityTextView);
+
+
+        progressDialog = new ProgressDialog(this);
+
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -44,6 +70,12 @@ public class HomeActivity extends Activity implements OnClickListener{
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    CurrentUserProfile = new SUser(0);
+                    System.out.println(CurrentUserProfile.getEmail());
+                    //CurrentUserProfile.setUID(firebaseAuth.getCurrentUser().toString());
+                    //GetProfile getProfile = new GetProfile();
+                    //getProfile.execute();
+
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                     finish();
@@ -61,6 +93,7 @@ public class HomeActivity extends Activity implements OnClickListener{
 
         textViewUserEmail = (TextView) findViewById(R.id.HiTextView);
         textViewUserEmail.setText("Hi, " + firebaseAuth.getCurrentUser().getEmail() + "!");
+        printUserProfile();
 
         buttonLogout.setOnClickListener(this);
     }
@@ -90,6 +123,52 @@ public class HomeActivity extends Activity implements OnClickListener{
         }
     }
 
+    public void editProfile(View view) {
+        Intent toLoginScreen = new Intent(this, EditProfile.class);
+        startActivity(toLoginScreen);
+    }
+
+    public void printUserProfile() {
+        //TextViewUid.setText(CurrentUserProfile.getUID());
+        //TextViewFullname.setText(CurrentUserProfile.getFullname());
+        //TextViewEmail.setText(CurrentUserProfile.getEmail());
+        //TextViewMuscle.setText(CurrentUserProfile.getMuscle());
+        //TextViewHealth.setText(CurrentUserProfile.getHealth());
+        //TextViewNationality.setText(CurrentUserProfile.getNationality());
+        //System.out.println(CurrentUserProfile.getUID());
+        //System.out.println(CurrentUserProfile.getFullname());
+        //System.out.println(CurrentUserProfile.getEmail());
+        //System.out.println(CurrentUserProfile.getMuscle());
+        //System.out.println(CurrentUserProfile.getHealth());
+        //System.out.println(CurrentUserProfile.getNationality());
+    }
+
+    public class GetProfile extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+              progressDialog.show();
+                try {
+                    CurrentUserProfile.getUserProfile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            return null;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog.setTitle("Loading user profile..");
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.hide();
+        }
+    }
 }
 
 

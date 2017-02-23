@@ -7,10 +7,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/logo3"
     tools:context="com.example.ramosjanoah.simplicity.LoginActivity"
     android:layout_width="match_parent">
 
+    <!--
     <TextView
         android:text="Login"
         android:layout_width="wrap_content"
@@ -20,18 +21,20 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp" />
+    -->
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:layout_marginTop="129dp"
+        android:layout_marginTop="171dp"
         android:id="@+id/EmailTextFieldRegister"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:hint="Enter your mail"
-        android:fontFamily="serif" />
+        android:gravity="center"
+        android:fontFamily="serif"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
     <EditText
@@ -42,13 +45,14 @@
         android:layout_marginTop="22dp"
         android:id="@+id/ConfirmPassword"
         android:hint="Enter your password"
+        android:gravity="center"
         android:layout_below="@+id/EmailTextFieldRegister"
         android:layout_alignLeft="@+id/EmailTextFieldRegister"
         android:layout_alignStart="@+id/EmailTextFieldRegister"
         android:fontFamily="serif" />
 
     <Button
-        android:text="GO"
+        android:text="LOGIN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="31dp"
@@ -62,15 +66,28 @@
 
     <TextView
         android:text="Do not have account? Register here"
+        android:textColor="#45320d"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="59dp"
+        android:layout_marginTop="29dp"
         android:id="@+id/DoNotHaveAccount"
         android:onClick="goRegister"
+        android:fontFamily="serif"
         android:layout_below="@+id/GoButton"
         android:layout_alignLeft="@+id/ConfirmPassword"
-        android:layout_alignStart="@+id/ConfirmPassword"
-        android:fontFamily="serif" />
+        android:layout_alignStart="@+id/ConfirmPassword" />
+
+    <Button
+        android:text="Test Gallery"
+        android:textColor="#FFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:id="@+id/toGallery"
+        android:layout_below="@+id/DoNotHaveAccount"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

@@ -2,6 +2,10 @@ package com.example.ramosjanoah.simplicity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button buttonLogIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private Button toGallery;
 
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -42,13 +48,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editTextEmail = (EditText) findViewById(R.id.EmailTextFieldRegister);
         editTextPassword = (EditText) findViewById(R.id.ConfirmPassword);
         buttonLogIn = (Button) findViewById(R.id.GoButton);
-
         buttonLogIn.setOnClickListener(this);
+
+        toGallery = (Button) findViewById(R.id.toGallery);
+        toGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goImageTest(v);
+            }
+        });
+
     }
 
     public void goHome() {
         finish();
         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+    }
+
+    public void goImageTest(View view) {
+        finish();
+        Intent toGalleryScreen = new Intent(this, ImgActivity.class);
+        startActivity(toGalleryScreen);
     }
 
     public void goRegister(View view) {
@@ -61,7 +81,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view == buttonLogIn) {
-            finish();
             userLogIn();
         }
     }
