@@ -20,7 +20,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static android.R.attr.type;
 import static android.content.Context.SENSOR_SERVICE;
+import static com.example.ramosjanoah.simplicity.R.id.testStep;
 
 
 /**
@@ -87,6 +89,11 @@ public class Fragment2 extends Fragment implements SensorEventListener {
     private Sensor accelerometer;
     private SensorManager sm;
 
+    private SensorManager ssManager;
+    private Sensor stepSensor;
+    private boolean isSensorPresent = false;
+
+
     private long curTime, lastUpdate;
     private float x, y, z, lastX, lastY, lastZ;
     private final static long UPDATE_PERIOD = 300;
@@ -103,35 +110,48 @@ public class Fragment2 extends Fragment implements SensorEventListener {
         sm.registerListener(this,accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         curTime = lastUpdate = (long)0.0;
         x = y = z = lastX = lastY = lastZ = (float)0.0;
+
+        stepSensor = sm.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        sm.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL);
         //System.out.println("initialized run()");
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        long curTime = System.currentTimeMillis();
+        Sensor sensor = event.sensor;
         SharedPreferences.Editor spEditor = sp.edit();
-        if ((curTime - lastUpdate) > UPDATE_PERIOD) {
-            long diffTime = (curTime - lastUpdate);
-            lastUpdate = curTime;
-            //System.out.println("onSensorChanged if 1 run()");
-            x = event.values[0];
-            y = event.values[1];
-            z = event.values[2];
 
-            float speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 4000;
+        if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            long curTime = System.currentTimeMillis();
+            if ((curTime - lastUpdate) > UPDATE_PERIOD) {
+                long diffTime = (curTime - lastUpdate);
+                lastUpdate = curTime;
+                //System.out.println("onSensorChanged if 1 run()");
+                x = event.values[0];
+                y = event.values[1];
+                z = event.values[2];
 
-            if (speed > SHAKE_THRESHOLD) {
-                //Toast.makeText(this, "Shake detected w/ speed: " +speed,  Toast.LENGTH_SHORT).show();
-                int points = sp.getInt("USER_HEALTH",-1);
-                points = points+3;
-                healthPoints.setText(Integer.toString(points));
-                //System.out.println("onSensorChanged if 2 run()");
-                spEditor.putInt("USER_HEALTH", points);
-                spEditor.commit();
+                float speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 4000;
+
+                if (speed > SHAKE_THRESHOLD) {
+                    //Toast.makeText(this, "Shake detected w/ speed: " +speed,  Toast.LENGTH_SHORT).show();
+                    int points = sp.getInt("USER_HEALTH", -1);
+                    points = points + 3;
+                    healthPoints.setText(Integer.toString(points));
+                    //System.out.println("onSensorChanged if 2 run()");
+                    spEditor.putInt("USER_HEALTH", points);
+                    spEditor.commit();
+                }
+                lastX = x;
+                lastY = y;
+                lastZ = z;
             }
-            lastX = x;
-            lastY = y;
-            lastZ = z;
+        }else if (sensor.getType() == Sensor.TYPE_STEP_COUNTER){
+            System.out.print("Muscle Detected : ");
+            spEditor.putInt("USER_MUSCLE",(int)event.values[0]);
+            spEditor.commit();
+            MuscleTextView.setText(Integer.toString(sp.getInt("USER_MUSCLE",-1)));
+            System.out.println(sp.getInt("USER_MUSCLE",-1));
         }
     }
 
