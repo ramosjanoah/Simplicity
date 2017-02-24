@@ -19,18 +19,26 @@ public class bgService extends IntentService{
     protected void onHandleIntent(Intent workIntent){
         SharedPreferences sp = this.getSharedPreferences("User_Reference", Context.MODE_PRIVATE);
         SharedPreferences.Editor spEditor = sp.edit();
-        int health_data;
-        while(true) {
+        int health_data = 999;
+        while(health_data>0) {
             health_data=sp.getInt("USER_HEALTH",-1);
             health_data--;
             System.out.println("Health deprecated");
             spEditor.putInt("USER_HEALTH", health_data);
             spEditor.commit();
             System.out.println(sp.getInt("USER_HEALTH", -1));
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (health_data>120){
+                try {
+                    Thread.sleep(800);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
