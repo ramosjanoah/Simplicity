@@ -5,18 +5,6 @@
     android:layout_height="match_parent"
     android:padding="20dp">
 
-    <!--
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/landscape_fragment" />
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/potrait_fragment" />
-
-    -->
-
     <Button
         android:text="Log Out"
         android:layout_width="wrap_content"
@@ -25,14 +13,12 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <!--
     <fragment
         android:name="com.example.ramosjanoah.simplicity.Fragment1"
         android:id="@+id/fragment1"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         tools:layout="@layout/fragment_fragment1"/>
-    -->
 
     <fragment
         android:name="com.example.ramosjanoah.simplicity.Fragment2"
@@ -40,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         tools:layout="@layout/fragment_fragment2"
+        android:layout_below="@id/fragment1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="59dp" />
