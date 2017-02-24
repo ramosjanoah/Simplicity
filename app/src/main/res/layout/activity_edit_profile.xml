@@ -102,6 +102,7 @@
         android:layout_marginBottom="206dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        style="@style/Widget.AppCompat.Button.Colored"/>
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:onClick="saveEdit" />
 
 </RelativeLayout>

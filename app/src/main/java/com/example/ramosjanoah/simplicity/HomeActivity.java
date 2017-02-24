@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
@@ -60,9 +61,15 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
 
         // Depending on the screen orientation replace with the correct fragment
 
+        if(configInfo.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            setContentView(R.layout.landscape_fragment);
+            //FragmentLandscape fragmentLandscape = new FragmentLandscape();
+            //fragmentTransaction.replace(android.R.id.content,fragmentLandscape);
+        } else {
             setContentView(R.layout.activity_home);
             //FragmentPotrait fragmentPortrait = new FragmentPotrait();
             //fragmentTransaction.replace(android.R.id.content,fragmentPortrait);
+        }
 
         // Schedule for the replacement of the Fragment as soon as possible
         fragmentTransaction.commit();
@@ -144,6 +151,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         Intent intent = new Intent(this, EditProfile.class);
         startActivity(intent);
     }
+
 }
 
 

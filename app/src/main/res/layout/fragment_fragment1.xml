@@ -41,6 +41,7 @@
 
         <TextView
         android:text="Fullname"
+            android:fontFamily="serif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
@@ -51,6 +52,7 @@
 
         <TextView
             android:text="Email"
+            android:fontFamily="serif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -61,6 +63,7 @@
 
         <TextView
             android:text="Nationality"
+            android:fontFamily="serif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/NationalityTextView"
@@ -70,37 +73,40 @@
             android:layout_marginTop="17dp" />
 
         <Button
+            android:text="CHANGE PICTURE"
+            android:textSize="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ButtonEditProfile"
-            android:text="Edit Profile"
-            android:textSize="10dp"
-            android:layout_marginTop="21dp"
-            android:layout_below="@+id/NationalityTextView"
-            android:layout_alignLeft="@+id/NationalityTextView"
-            android:layout_alignStart="@+id/NationalityTextView"
-            android:onClick="editProfile" />
+            android:id="@+id/buttonPicture"
+            android:textColor="#FFFFFF"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_alignBaseline="@+id/ButtonEditProfile"
+            android:layout_alignBottom="@+id/ButtonEditProfile"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_alignEnd="@+id/imageView" />
 
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
             app:srcCompat="@drawable/no_ava"
-            android:layout_marginLeft="53dp"
-            android:layout_marginStart="53dp"
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
             android:id="@+id/imageView"
             android:layout_alignTop="@+id/UidTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <Button
-            android:text="CHANGE PICTURE"
-            android:textSize="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonPicture"
-            android:layout_alignBaseline="@+id/ButtonEditProfile"
-            android:layout_alignBottom="@+id/ButtonEditProfile"
-            android:layout_alignRight="@+id/imageView"
-            android:layout_alignEnd="@+id/imageView" />
+            android:id="@+id/ButtonEditProfile"
+            android:text="Edit Profile"
+            android:textSize="10dp"
+            android:onClick="editProfile"
+            android:textColor="#FFFFFF"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_below="@+id/NationalityTextView"
+            android:layout_alignRight="@+id/NationalityTextView"
+            android:layout_alignEnd="@+id/NationalityTextView" />
     </RelativeLayout>
 </FrameLayout>

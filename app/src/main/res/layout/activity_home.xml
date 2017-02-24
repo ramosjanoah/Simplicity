@@ -3,10 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg5"
     android:padding="20dp">
+
+    <fragment
+        android:name="com.example.ramosjanoah.simplicity.Fragment1"
+        android:id="@+id/fragment1"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        tools:layout="@layout/fragment_fragment1"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="Log Out"
+        android:textColor="#FFFFFF"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ButtonLogOut"
@@ -14,21 +28,14 @@
         android:layout_centerHorizontal="true" />
 
     <fragment
-        android:name="com.example.ramosjanoah.simplicity.Fragment1"
-        android:id="@+id/fragment1"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        tools:layout="@layout/fragment_fragment1"/>
-
-    <fragment
         android:name="com.example.ramosjanoah.simplicity.Fragment2"
         android:id="@+id/fragment2"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         tools:layout="@layout/fragment_fragment2"
-        android:layout_below="@id/fragment1"
+        android:layout_above="@+id/ButtonLogOut"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="59dp" />
+        android:layout_marginBottom="76dp" />
 
 </RelativeLayout>
