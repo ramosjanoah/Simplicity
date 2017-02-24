@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,7 +17,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.app.Fragment;
+import android.app.FragmentManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -30,20 +32,11 @@ import static com.google.android.gms.internal.zzt.TAG;
  * Created by ramosjanoah on 2/18/2017.
  */
 
-public class HomeActivity extends Activity implements OnClickListener{
+public class HomeActivity extends FragmentActivity implements OnClickListener {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private String email;
-    private TextView textViewUserEmail;
     private Button buttonLogout;
-    private TextView TextViewUid;
-    private TextView TextViewFullname;
-    private TextView TextViewEmail;
-    private TextView TextViewMuscle;
-    private TextView TextViewHealth;
-    private TextView TextViewNationality;
-    private SUser CurrentUserProfile;
     private ProgressDialog progressDialog;
 
     @Override
@@ -66,15 +59,11 @@ public class HomeActivity extends Activity implements OnClickListener{
         Configuration configInfo = getResources().getConfiguration();
 
         // Depending on the screen orientation replace with the correct fragment
-        if(configInfo.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            setContentView(R.layout.landscape_fragment);
-            //FragmentLandscape fragmentLandscape = new FragmentLandscape();
-            //fragmentTransaction.replace(android.R.id.content,fragmentLandscape);
-        } else {
+
             setContentView(R.layout.activity_home);
             //FragmentPotrait fragmentPortrait = new FragmentPotrait();
             //fragmentTransaction.replace(android.R.id.content,fragmentPortrait);
-        }
+
         // Schedule for the replacement of the Fragment as soon as possible
         fragmentTransaction.commit();
 
@@ -82,12 +71,12 @@ public class HomeActivity extends Activity implements OnClickListener{
 
         firebaseAuth = FirebaseAuth.getInstance();
         buttonLogout = (Button) findViewById(R.id.ButtonLogOut);
-        TextViewUid = (TextView) findViewById(R.id.UidTextView);
-        TextViewFullname = (TextView) findViewById(R.id.FullnameTextView);
-        TextViewEmail = (TextView) findViewById(R.id.EmailTextView);
-        TextViewMuscle = (TextView) findViewById(R.id.MuscleTextView);
-        TextViewHealth = (TextView) findViewById(R.id.HealthTextView);
-        TextViewNationality = (TextView) findViewById(R.id.NationalityTextView);
+        //TextViewUid = (TextView) findViewById(R.id.UidTextView);
+        //TextViewFullname = (TextView) findViewById(R.id.FullnameTextView);
+        //TextViewEmail = (TextView) findViewById(R.id.EmailTextView);
+        //TextViewMuscle = (TextView) findViewById(R.id.MuscleTextView);
+        //TextViewHealth = (TextView) findViewById(R.id.HealthTextView);
+        //TextViewNationality = (TextView) findViewById(R.id.NationalityTextView);
 
         progressDialog = new ProgressDialog(this);
 
@@ -99,8 +88,8 @@ public class HomeActivity extends Activity implements OnClickListener{
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    GetProfile getProfile = new GetProfile();
-                    getProfile.execute();
+                    //GetProfile getProfile = new GetProfile();
+                    //getProfile.execute();
 
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -113,18 +102,12 @@ public class HomeActivity extends Activity implements OnClickListener{
         if (firebaseAuth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
-        } else {
-            CurrentUserProfile = new SUser(firebaseAuth.getCurrentUser().getEmail(), firebaseAuth.getCurrentUser().getUid());
-            System.out.println("CurrentUserProfile (UID) : " + firebaseAuth.getCurrentUser().getUid());
-            System.out.println("CurrentUserProfile (Email) : " + firebaseAuth.getCurrentUser().getEmail());
-            GetProfile getProfile = new GetProfile();
-            getProfile.execute();
         }
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        textViewUserEmail = (TextView) findViewById(R.id.HiTextView);
-        textViewUserEmail.setText("Hi, " + firebaseAuth.getCurrentUser().getEmail() + "!");
+        //textViewUserEmail = (TextView) findViewById(R.id.HiTextView);
+        //textViewUserEmail.setText("Hi, " + firebaseAuth.getCurrentUser().getEmail() + "!");
 
         buttonLogout.setOnClickListener(this);
 
@@ -158,51 +141,9 @@ public class HomeActivity extends Activity implements OnClickListener{
     }
 
     public void editProfile(View view) {
-        Intent toLoginScreen = new Intent(this, EditProfile.class);
-        startActivity(toLoginScreen);
+        Intent intent = new Intent(this, EditProfile.class);
+        startActivity(intent);
     }
-
-    public void printUserProfile() {
-        TextViewUid.setText(CurrentUserProfile.getUID());
-        TextViewFullname.setText(CurrentUserProfile.getFullname());
-        TextViewEmail.setText(CurrentUserProfile.getEmail());
-        TextViewMuscle.setText(String.valueOf(CurrentUserProfile.getMuscle()));
-        TextViewHealth.setText(String.valueOf(CurrentUserProfile.getHealth()));
-        TextViewNationality.setText(CurrentUserProfile.getNationality());
-        //System.out.println(CurrentUserProfile.getUID());
-        //System.out.println(CurrentUserProfile.getFullname());
-        //System.out.println(CurrentUserProfile.getEmail());
-        //System.out.println(CurrentUserProfile.getMuscle());
-        //System.out.println(CurrentUserProfile.getHealth());
-        //System.out.println(CurrentUserProfile.getNationality());
-    }
-
-    public class GetProfile extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... strings) {
-                try {
-                    CurrentUserProfile.getUserProfile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog.setTitle("Loading user profile..");
-            progressDialog.show();
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            progressDialog.hide();
-            printUserProfile();
-        }
-    }
-
 }
 
 

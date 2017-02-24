@@ -21,24 +21,23 @@ import java.net.URL;
 public class SUser {
     private String email;
     private String fullname;
-    private String UID;
     private String nationality;
     private int health;
     private int muscle;
+    private static String photo;
+
     private static final String DEFAULT_FULLNAME = "Guest";
     private static final String DEFAULT_NATIONALITY = "Indonesia";
     private static final int DEFAULT_HEALTH = 50;
     private static final int MIN_HEALTH = 0;
     private static final int MAX_HEALTH = 100;
     private static final int DEFAULT_MUSCLE = 50;
-
     private static final int MIN_MUSCLE = 0;
     private static final int MAX_MUSCLE = 100;
 
 
     public SUser() {
         email = null;
-        UID = null;
         fullname = DEFAULT_FULLNAME;
         nationality = DEFAULT_NATIONALITY;
         health = DEFAULT_HEALTH;
@@ -48,7 +47,6 @@ public class SUser {
     public SUser(int type) {
         if (type == 0) {
             email = "guest@email.com";
-            UID = "uid";
             fullname = DEFAULT_FULLNAME;
             nationality = DEFAULT_NATIONALITY;
             health = DEFAULT_HEALTH;
@@ -58,7 +56,6 @@ public class SUser {
 
     public SUser(String email, String UID) {
         this.email = email;
-        this.UID = UID;
         fullname = DEFAULT_FULLNAME;
         nationality = DEFAULT_NATIONALITY;
         health = DEFAULT_HEALTH;
@@ -68,7 +65,6 @@ public class SUser {
     public SUser(String email, String fullname, String UID, String nationality, int health, int muscle) {
         this.email = email;
         this.fullname = fullname;
-        this.UID = UID;
         this.nationality = nationality;
         this.health = health;
         this.muscle = muscle;
@@ -82,13 +78,6 @@ public class SUser {
         this.email = email;
     }
 
-    public String getUID() {
-        return UID;
-    }
-
-    public void setUID(String UID) {
-        this.UID = UID;
-    }
 
     public String getFullname() {
         return fullname;
@@ -122,14 +111,23 @@ public class SUser {
         this.muscle = muscle;
     }
 
+    public static String getPhoto() {
+        return photo;
+    }
+
+    public static void setPhoto(String photo) {
+        SUser.photo = photo;
+    }
+
     public void getUserProfile() throws IOException, JSONException {
         //uid = "gbkPzSkyg9XeQtlRktRtmIs4QfS2";
-        String urllink = "https://ramosjanoah.herokuapp.com/readjson.php?uid=" + this.UID;
+        String urllink = "https://ramosjanoah.herokuapp.com/readjson.php?email=" + email;
         System.out.println(urllink);
         URL url = new URL(urllink);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("GET");
 
+        // Pembaca echo dari PHP
         //BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         InputStreamReader isr;
         isr = new InputStreamReader(conn.getInputStream());
@@ -143,8 +141,6 @@ public class SUser {
 
         String jsonstring = sb.toString();
         JSONObject obj = new JSONObject(jsonstring);
-        // System.out.println("Nama : " + obj.getString("fullname"));
-        // System.out.println("Health : " + obj.getInt("health"));
 
         fullname = obj.getString("fullname");
         nationality = obj.getString("nationality");
@@ -160,8 +156,8 @@ public class SUser {
         conn.setDoOutput(true);
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-        String postParameters = "uid="+UID+"&email="+email+"&fullname="+fullname+
-                "&health="+health+"&muscle="+muscle+"&nationality="+nationality;
+        String postParameters = "&email="+email+"&fullname="+fullname+
+                "&health="+health+"&muscle="+muscle+"&nationality="+nationality+"&photo="+photo;
 
         conn.setFixedLengthStreamingMode(postParameters.getBytes().length);
         PrintWriter out = new PrintWriter(conn.getOutputStream());
@@ -176,8 +172,8 @@ public class SUser {
         conn.setDoOutput(true);
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-        String postParameters = "uid="+UID+"&email="+email+"&fullname="+fullname+
-                "&health="+health+"&muscle="+muscle+"&nationality="+nationality;
+        String postParameters = "&email="+email+"&fullname="+fullname+
+                "&health="+health+"&muscle="+muscle+"&nationality="+nationality+"&photo="+photo;
 
         conn.setFixedLengthStreamingMode(postParameters.getBytes().length);
         PrintWriter out = new PrintWriter(conn.getOutputStream());

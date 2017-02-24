@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener { //implements SensorEventListener{
 
 
@@ -34,6 +39,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+
+    private SUser UserLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +74,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void goHome() {
-        finish();
         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
     }
 
@@ -114,6 +120,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             finish();
+
                             goHome();
                         } else {
                             Toast.makeText(LoginActivity.this, "Login failed.",
@@ -122,5 +129,42 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
 
+    }
+
+    public class GetProfile extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            //try {
+             //   //UserLogin.getUserProfile();
+            //} catch (IOException e) {
+            //    e.printStackTrace();
+            //} catch (JSONException e) {
+            //    e.printStackTrace();
+            //}
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog.setTitle("Loading user profile..");
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.hide();
+            // Save to SharedPreference
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("USER_EMAIL", "Email (Test)");
+        outState.putString("USER_FULLNAME", "Fullname (Test)");
+        outState.putInt("USER_HEALTH", 0);
+        outState.putInt("USER_MUSCLE", 0);
+        outState.putString("USER_NATIONALITY", "Nationality (Test)");
+        outState.putString("USER_PHOTO", "TBD (Test)");
     }
 }

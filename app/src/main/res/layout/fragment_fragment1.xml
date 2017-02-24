@@ -30,7 +30,6 @@
 
 
         <TextView
-            android:text="UID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="38dp"
@@ -76,11 +75,11 @@
             android:id="@+id/ButtonEditProfile"
             android:text="Edit Profile"
             android:textSize="10dp"
-            android:onClick="editProfile"
             android:layout_marginTop="21dp"
             android:layout_below="@+id/NationalityTextView"
             android:layout_alignLeft="@+id/NationalityTextView"
-            android:layout_alignStart="@+id/NationalityTextView" />
+            android:layout_alignStart="@+id/NationalityTextView"
+            android:onClick="editProfile" />
 
         <ImageView
             android:layout_width="120dp"
