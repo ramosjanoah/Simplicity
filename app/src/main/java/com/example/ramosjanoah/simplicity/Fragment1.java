@@ -1,9 +1,13 @@
 package com.example.ramosjanoah.simplicity;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import static android.app.Activity.RESULT_OK;
+import static android.view.View.Y;
+import static com.example.ramosjanoah.simplicity.R.id.imageView;
 
 
 /**
@@ -83,14 +91,54 @@ public class Fragment1 extends Fragment {
         TextViewFullname = (TextView) view.findViewById(R.id.FullnameTextView);
         TextViewEmail = (TextView) view.findViewById(R.id.EmailTextView);
         TextViewNationality = (TextView) view.findViewById(R.id.NationalityTextView);
-        PhotoProfile = (ImageView) view.findViewById(R.id.imageView);
+        PhotoProfile = (ImageView) view.findViewById(imageView);
         buttonChangePhoto = (Button) view.findViewById(R.id.buttonPicture);
         buttonEditProfile = (Button) view.findViewById(R.id.ButtonEditProfile);
+
+        buttonChangePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), RESULT_LOAD_IMAGE);
+
+                System.out.println("Clicked");
+                Intent i = new Intent(
+                        Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(i, 15);
+            }
+        });
 
 
         return view;
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("Result");
+
+        if (requestCode == 15 && resultCode == RESULT_OK && null != data) {
+
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getActivity().getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            PhotoProfile.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+        }
+    }
+
     /*
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
