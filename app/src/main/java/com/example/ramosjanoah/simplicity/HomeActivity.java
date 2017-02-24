@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private Button buttonLogout;
     private ProgressDialog progressDialog;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +153,6 @@ public class HomeActivity extends FragmentActivity implements OnClickListener {
         Intent intent = new Intent(this, EditProfile.class);
         startActivity(intent);
     }
-
 }
 
 

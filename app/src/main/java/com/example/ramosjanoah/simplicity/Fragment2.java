@@ -1,6 +1,7 @@
 package com.example.ramosjanoah.simplicity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,6 @@ import android.widget.TextView;
  * Activities that contain this fragment must implement the
  * {@link Fragment2.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Fragment2#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class Fragment2 extends Fragment {
@@ -34,6 +34,7 @@ public class Fragment2 extends Fragment {
 
     private TextView HealthTextView;
     private TextView MuscleTextView;
+    public static final String USER_PREFERENCE = "User_Reference";
 
 
 
@@ -47,8 +48,6 @@ public class Fragment2 extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment Fragment2.
      */
     /*
@@ -78,6 +77,15 @@ public class Fragment2 extends Fragment {
         View view=inflater.inflate(R.layout.fragment_fragment2, container, false);
         HealthTextView = (TextView) view.findViewById(R.id.HealthTextView);
         MuscleTextView = (TextView) view.findViewById(R.id.MuscleTextView);
+        SharedPreferences sp = getActivity().getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
+        if (sp.getInt("USER_HEALTH", -1) == -1) {
+            HealthTextView.setText("Health Not Found");
+            MuscleTextView.setText("Muscle Not Found");
+        } else {
+            HealthTextView.setText(String.valueOf(sp.getInt("USER_HEALTH", -1)));
+            MuscleTextView.setText(String.valueOf(sp.getInt("USER_MUSCLE", -1)));
+        }
+
         return view;
     }
 
