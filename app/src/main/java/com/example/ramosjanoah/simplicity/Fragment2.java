@@ -10,6 +10,7 @@ import android.hardware.SensorManager;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,7 +90,7 @@ public class Fragment2 extends Fragment implements SensorEventListener {
     private float x, y, z, lastX, lastY, lastZ;
     private final static long UPDATE_PERIOD = 300;
     private final static int SHAKE_THRESHOLD = 800;
-
+    private SharedPreferences sp;
     TextView healthPoints;
     //EditText healthInput;
 
@@ -99,16 +100,17 @@ public class Fragment2 extends Fragment implements SensorEventListener {
         sm.registerListener(this,accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         curTime = lastUpdate = (long)0.0;
         x = y = z = lastX = lastY = lastZ = (float)0.0;
+        //System.out.println("initialized run()");
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         long curTime = System.currentTimeMillis();
-
+        SharedPreferences.Editor spEditor = sp.edit();
         if ((curTime - lastUpdate) > UPDATE_PERIOD) {
             long diffTime = (curTime - lastUpdate);
             lastUpdate = curTime;
-
+            //System.out.println("onSensorChanged if 1 run()");
             x = event.values[0];
             y = event.values[1];
             z = event.values[2];
@@ -120,6 +122,9 @@ public class Fragment2 extends Fragment implements SensorEventListener {
                 int points = Integer.parseInt(healthPoints.getText().toString());
                 points = points+3;
                 healthPoints.setText(Integer.toString(points));
+                //System.out.println("onSensorChanged if 2 run()");
+                spEditor.putInt("USER_HEALTH", points);
+                spEditor.commit();
             }
             lastX = x;
             lastY = y;
@@ -135,13 +140,12 @@ public class Fragment2 extends Fragment implements SensorEventListener {
         HealthTextView = (TextView) view.findViewById(R.id.HealthTextView);
         MuscleTextView = (TextView) view.findViewById(R.id.MuscleTextView);
 
-        healthPoints = (TextView) view.findViewById(R.id.health);
-        this.initialize();
+
         //healthInput = (EditText) findViewById(R.id.sementara);
 
         //Button switchX = (Button) findViewById(R.id.switchX);
 
-        SharedPreferences sp = getActivity().getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
+        sp = getActivity().getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
         if (sp.getInt("USER_HEALTH", -1) == -1) {
             HealthTextView.setText("Health Not Found");
             MuscleTextView.setText("Muscle Not Found");
@@ -150,6 +154,8 @@ public class Fragment2 extends Fragment implements SensorEventListener {
             MuscleTextView.setText(String.valueOf(sp.getInt("USER_MUSCLE", -1)));
         }
 
+        healthPoints = (TextView) view.findViewById(R.id.HealthTextView);
+        this.initialize();
         return view;
     }
 
