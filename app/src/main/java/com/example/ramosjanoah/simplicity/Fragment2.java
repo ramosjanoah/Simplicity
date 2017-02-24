@@ -2,6 +2,7 @@ package com.example.ramosjanoah.simplicity;
 
 import android.content.Context;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -94,6 +95,8 @@ public class Fragment2 extends Fragment implements SensorEventListener {
     TextView healthPoints;
     //EditText healthInput;
 
+    Intent mServiceIntent;
+
     private void initialize() {
         sm = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
         accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -140,6 +143,10 @@ public class Fragment2 extends Fragment implements SensorEventListener {
         HealthTextView = (TextView) view.findViewById(R.id.HealthTextView);
         MuscleTextView = (TextView) view.findViewById(R.id.MuscleTextView);
 
+/*
+        healthPoints = (TextView) view.findViewById(R.id.HealthTextView);
+        this.initialize();
+        */
 
         //healthInput = (EditText) findViewById(R.id.sementara);
 
@@ -152,10 +159,19 @@ public class Fragment2 extends Fragment implements SensorEventListener {
         } else {
             HealthTextView.setText(String.valueOf(sp.getInt("USER_HEALTH", -1)));
             MuscleTextView.setText(String.valueOf(sp.getInt("USER_MUSCLE", -1)));
+
+            //Service Intent Start
+            mServiceIntent = new Intent(getActivity(), bgService.class);
+            mServiceIntent.putExtra("Health",sp.getInt("USER_HEALTH",-1));
+            getActivity().startService(mServiceIntent);
         }
+
 
         healthPoints = (TextView) view.findViewById(R.id.HealthTextView);
         this.initialize();
+
+
+
         return view;
     }
 
