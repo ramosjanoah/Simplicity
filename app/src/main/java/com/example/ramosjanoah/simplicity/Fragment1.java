@@ -2,6 +2,7 @@ package com.example.ramosjanoah.simplicity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -38,7 +39,7 @@ public class Fragment1 extends Fragment {
     private ImageView PhotoProfile;
     private Button buttonChangePhoto;
     private Button buttonEditProfile;
-
+    public static final String USER_PREFERENCE = "User_Reference";
 
     private OnFragmentInteractionListener mListener;
 
@@ -50,8 +51,6 @@ public class Fragment1 extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment Fragment1.
      */
     /*
@@ -64,7 +63,7 @@ public class Fragment1 extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
+    */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +73,7 @@ public class Fragment1 extends Fragment {
         }
 
     }
-*/
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -86,8 +85,16 @@ public class Fragment1 extends Fragment {
         PhotoProfile = (ImageView) view.findViewById(R.id.imageView);
         buttonChangePhoto = (Button) view.findViewById(R.id.buttonPicture);
         buttonEditProfile = (Button) view.findViewById(R.id.ButtonEditProfile);
-
-
+        SharedPreferences sp = getActivity().getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
+        if (!sp.getString("USER_EMAIL", "EMPTY").equals("EMPTY")) {
+            TextViewEmail.setText(sp.getString("USER_EMAIL", null));
+            TextViewFullname.setText(sp.getString("USER_FULLNAME", null));
+            TextViewNationality.setText(sp.getString("USER_NATIONALITY", null));
+        } else {
+            TextViewEmail.setText("Email Not Found");
+            TextViewFullname.setText("Fullname Not Found");
+            TextViewNationality.setText("Nationality Not Found");
+        }
         return view;
 
     }

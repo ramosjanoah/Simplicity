@@ -1,7 +1,9 @@
 package com.example.ramosjanoah.simplicity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -41,6 +43,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth firebaseAuth;
 
     private SUser UserLogin;
+    private String stringEmail;
+    public static final String USER_PREFERENCE = "User_Reference";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,8 +123,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
+                            GetProfile g = new GetProfile();
+                            g.execute();
                             finish();
-
+                            saveProfile();
                             goHome();
                         } else {
                             Toast.makeText(LoginActivity.this, "Login failed.",
@@ -134,29 +140,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public class GetProfile extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
-            //try {
-             //   //UserLogin.getUserProfile();
-            //} catch (IOException e) {
-            //    e.printStackTrace();
-            //} catch (JSONException e) {
-            //    e.printStackTrace();
-            //}
+            try {
+                UserLogin = new SUser(firebaseAuth.getCurrentUser().getEmail());
+                UserLogin.printUserInformation();
+                UserLogin.getUserProfile();
+                UserLogin.printUserInformation();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return null;
         }
 
         @Override
         protected void onPreExecute() {
-            progressDialog.setTitle("Loading user profile..");
-            progressDialog.show();
         }
 
         @Override
         protected void onPostExecute(String s) {
-            progressDialog.hide();
             // Save to SharedPreference
         }
     }
 
+    /*
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -166,5 +173,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         outState.putInt("USER_MUSCLE", 0);
         outState.putString("USER_NATIONALITY", "Nationality (Test)");
         outState.putString("USER_PHOTO", "TBD (Test)");
+        saveProfile();
+    }*/
+
+    private void saveProfile() {
+        SharedPreferences sp = getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor spEditor = sp.edit();
+        spEditor.putString("USER_EMAIL", UserLogin.getEmail());
+        spEditor.putString("USER_FULLNAME", UserLogin.getFullname());
+        spEditor.putInt("USER_HEALTH", UserLogin.getHealth());
+        spEditor.putInt("USER_MUSCLE", UserLogin.getMuscle());
+        spEditor.putString("USER_NATIONALITY", UserLogin.getNationality());
+        spEditor.putString("USER_PHOTO", UserLogin.getPhoto());
+        spEditor.commit();
+    }
+
+    @Override
+    protected void onStop() {
+        saveProfile();
+        super.onStop();
     }
 }

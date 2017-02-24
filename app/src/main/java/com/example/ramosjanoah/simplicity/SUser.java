@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLOutput;
 
 /**
  * Created by ramosjanoah on 2/22/2017.
@@ -34,7 +35,7 @@ public class SUser {
     private static final int DEFAULT_MUSCLE = 50;
     private static final int MIN_MUSCLE = 0;
     private static final int MAX_MUSCLE = 100;
-
+    private static final String DEFAULT_PHOTO = "TBD";
 
     public SUser() {
         email = null;
@@ -42,6 +43,7 @@ public class SUser {
         nationality = DEFAULT_NATIONALITY;
         health = DEFAULT_HEALTH;
         muscle = DEFAULT_MUSCLE;
+        photo = DEFAULT_PHOTO;
     }
 
     public SUser(int type) {
@@ -51,15 +53,17 @@ public class SUser {
             nationality = DEFAULT_NATIONALITY;
             health = DEFAULT_HEALTH;
             muscle = DEFAULT_MUSCLE;
+            photo = DEFAULT_PHOTO;
         }
     }
 
-    public SUser(String email, String UID) {
+    public SUser(String email) {
         this.email = email;
         fullname = DEFAULT_FULLNAME;
         nationality = DEFAULT_NATIONALITY;
         health = DEFAULT_HEALTH;
         muscle = DEFAULT_MUSCLE;
+        photo = DEFAULT_PHOTO;
     }
 
     public SUser(String email, String fullname, String UID, String nationality, int health, int muscle) {
@@ -68,6 +72,7 @@ public class SUser {
         this.nationality = nationality;
         this.health = health;
         this.muscle = muscle;
+        photo = DEFAULT_PHOTO;
     }
 
     public String getEmail() {
@@ -140,6 +145,7 @@ public class SUser {
         }
 
         String jsonstring = sb.toString();
+        System.out.println(jsonstring);
         JSONObject obj = new JSONObject(jsonstring);
 
         fullname = obj.getString("fullname");
@@ -179,5 +185,10 @@ public class SUser {
         PrintWriter out = new PrintWriter(conn.getOutputStream());
         out.print(postParameters);
         out.close();
+    }
+
+    public void printUserInformation() {
+        System.out.println("email = " + this.email +
+                        "fullname = " + this.fullname);
     }
 }
