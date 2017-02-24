@@ -118,11 +118,11 @@ public class Fragment2 extends Fragment implements SensorEventListener {
             y = event.values[1];
             z = event.values[2];
 
-            float speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
+            float speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 4000;
 
             if (speed > SHAKE_THRESHOLD) {
                 //Toast.makeText(this, "Shake detected w/ speed: " +speed,  Toast.LENGTH_SHORT).show();
-                int points = Integer.parseInt(healthPoints.getText().toString());
+                int points = sp.getInt("USER_HEALTH",-1);
                 points = points+3;
                 healthPoints.setText(Integer.toString(points));
                 //System.out.println("onSensorChanged if 2 run()");
