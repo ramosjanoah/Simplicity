@@ -7,7 +7,7 @@
     android:padding="20dp">
 
     <fragment
-        android:name="com.example.ramosjanoah.simplicity.Fragment1"
+        class="com.example.ramosjanoah.simplicity.Fragment1"
         android:id="@+id/fragment1"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         android:layout_centerHorizontal="true" />
 
     <fragment
-        android:name="com.example.ramosjanoah.simplicity.Fragment2"
+        class="com.example.ramosjanoah.simplicity.Fragment2"
         android:id="@+id/fragment2"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -36,6 +36,6 @@
         android:layout_above="@+id/ButtonLogOut"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="76dp" />
+        android:layout_marginBottom="73dp" />
 
 </RelativeLayout>

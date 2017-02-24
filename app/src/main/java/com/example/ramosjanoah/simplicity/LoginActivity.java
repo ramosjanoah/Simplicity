@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() != null) {
+            finish();
             goHome();
         }
 
@@ -126,7 +127,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             GetProfile g = new GetProfile();
                             g.execute();
                             finish();
-                            saveProfile();
                             goHome();
                         } else {
                             Toast.makeText(LoginActivity.this, "Login failed.",
@@ -160,6 +160,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected void onPostExecute(String s) {
             // Save to SharedPreference
+            saveProfile();
         }
     }
 
@@ -179,6 +180,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void saveProfile() {
         SharedPreferences sp = getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
         SharedPreferences.Editor spEditor = sp.edit();
+        System.out.println("Pair King :");
+        UserLogin.printUserInformation();
         spEditor.putString("USER_EMAIL", UserLogin.getEmail());
         spEditor.putString("USER_FULLNAME", UserLogin.getFullname());
         spEditor.putInt("USER_HEALTH", UserLogin.getHealth());
@@ -190,7 +193,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onStop() {
-        saveProfile();
+        //saveProfile();
         super.onStop();
     }
 }

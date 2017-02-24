@@ -188,7 +188,10 @@ public class SUser {
     }
 
     public void printUserInformation() {
-        System.out.println("email = " + this.email +
-                        "fullname = " + this.fullname);
+        System.out.println(this.email +
+                " " + this.fullname +
+                " " + this.nationality +
+                " " + this.health +
+                " " + this.muscle);
     }
 }
