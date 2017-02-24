@@ -29,7 +29,7 @@ public class bgService extends IntentService{
             System.out.println(sp.getInt("USER_HEALTH", -1));
             if (health_data>120){
                 try {
-                    Thread.sleep(800);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import static android.R.attr.type;
@@ -46,6 +47,7 @@ public class Fragment2 extends Fragment implements SensorEventListener {
 
     private TextView HealthTextView;
     private TextView MuscleTextView;
+    private ProgressBar progressBar;
     public static final String USER_PREFERENCE = "User_Reference";
 
 
@@ -122,6 +124,9 @@ public class Fragment2 extends Fragment implements SensorEventListener {
         SharedPreferences.Editor spEditor = sp.edit();
 
         if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            int points = sp.getInt("USER_HEALTH", -1);
+            healthPoints.setText(Integer.toString(points));
+            progressBar.setProgress(points);
             long curTime = System.currentTimeMillis();
             if ((curTime - lastUpdate) > UPDATE_PERIOD) {
                 long diffTime = (curTime - lastUpdate);
@@ -135,9 +140,7 @@ public class Fragment2 extends Fragment implements SensorEventListener {
 
                 if (speed > SHAKE_THRESHOLD) {
                     //Toast.makeText(this, "Shake detected w/ speed: " +speed,  Toast.LENGTH_SHORT).show();
-                    int points = sp.getInt("USER_HEALTH", -1);
                     points = points + 3;
-                    healthPoints.setText(Integer.toString(points));
                     //System.out.println("onSensorChanged if 2 run()");
                     spEditor.putInt("USER_HEALTH", points);
                     spEditor.commit();
@@ -162,6 +165,7 @@ public class Fragment2 extends Fragment implements SensorEventListener {
         View view=inflater.inflate(R.layout.fragment_fragment2, container, false);
         HealthTextView = (TextView) view.findViewById(R.id.HealthTextView);
         MuscleTextView = (TextView) view.findViewById(R.id.MuscleTextView);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
 /*
         healthPoints = (TextView) view.findViewById(R.id.HealthTextView);
