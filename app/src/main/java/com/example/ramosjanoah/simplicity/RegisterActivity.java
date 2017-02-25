@@ -5,6 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +19,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,23 +31,28 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by ramosjanoah on 2/18/2017.
  */
-public class RegisterActivity extends Activity implements View.OnClickListener {
+public class RegisterActivity extends Activity implements View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
-    private EditText editTextNationality;
+    private TextView TextNationality;
 
     private TextView AlreadyRegister;
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
     private SUser UserToRegister;
+
+    private GoogleApiClient mGoogleApiClient;
 
 
     @Override
@@ -59,12 +70,22 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         editTextEmail = (EditText) findViewById(R.id.EmailTextFieldRegister);
         editTextPassword = (EditText) findViewById(R.id.PasswordTextField);
         editTextConfirmPassword = (EditText) findViewById(R.id.ConfirmPassword);
-        editTextNationality = (EditText) findViewById(R.id.Nationality);
+        TextNationality = (TextView) findViewById(R.id.Nationality);
         AlreadyRegister = (TextView) findViewById(R.id.AlreadyRegister);
 
         buttonRegister.setOnClickListener(this);
         AlreadyRegister.setOnClickListener(this);
         firebaseAuth = FirebaseAuth.getInstance();
+
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
+
     }
 
     public void goLogin() {
@@ -115,7 +136,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                             if (task.isSuccessful()) {
                                 System.out.println("xxxxx3");
                                 UserToRegister = new SUser(email,
-                                        editTextNationality.getText().toString());
+                                        TextNationality.getText().toString());
                                 System.out.println("xxxxx4");
                                 // Register!
                                 RegisterProfile register = new RegisterProfile();
@@ -163,4 +184,55 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                     Toast.LENGTH_SHORT).show();
         }
     }
+
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        System.out.println("On Connected");
+        Location lastLocation = LocationServices.FusedLocationApi
+                .getLastLocation(mGoogleApiClient);
+
+        if (lastLocation != null) {
+            double latitude = lastLocation.getLatitude();
+            double longitude = lastLocation.getLongitude();
+
+            System.out.println(latitude);
+            System.out.println(longitude);
+
+
+            Geocoder gcd = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses;
+            try {
+                addresses = gcd.getFromLocation(latitude, longitude, 1);
+                if (addresses != null) {
+                    if (addresses.size() > 0) {
+                        String cityName = addresses.get(0).getCountryName();
+                        TextNationality.setText(cityName);
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("Error get location");
+                e.printStackTrace();
+            }
+        }
+    }
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        System.out.println("Connection Failed");
+    }
+    @Override
+    public void onConnectionSuspended(int arg0) {
+        System.out.println("Connection Suspended");
+        mGoogleApiClient.connect();
+    }
+
 }
