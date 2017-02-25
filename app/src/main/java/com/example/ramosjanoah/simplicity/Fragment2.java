@@ -140,7 +140,7 @@ public class Fragment2 extends Fragment implements SensorEventListener {
                 y = event.values[1];
                 z = event.values[2];
 
-                float speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 4000;
+                float speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 5000;
 
                 if (speed > SHAKE_THRESHOLD) {
                     //Toast.makeText(this, "Shake detected w/ speed: " +speed,  Toast.LENGTH_SHORT).show();

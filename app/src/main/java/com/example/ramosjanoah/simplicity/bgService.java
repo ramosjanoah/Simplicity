@@ -1,10 +1,13 @@
 package com.example.ramosjanoah.simplicity;
 
 import android.app.IntentService;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
 
 import org.json.JSONException;
 
@@ -30,6 +33,13 @@ public class bgService extends IntentService{
     }
     @Override
     protected void onHandleIntent(Intent workIntent){
+
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setSmallIcon(R.drawable.logo3);
+        mBuilder.setContentTitle("Your health has emptied!!");
+        mBuilder.setContentText("Your health has depleted! Quickly recharge it!");
+
         SharedPreferences sp = this.getSharedPreferences("User_Reference", Context.MODE_PRIVATE);
         SharedPreferences.Editor spEditor = sp.edit();
 
@@ -59,16 +69,6 @@ public class bgService extends IntentService{
             userToUpdate.setMuscle(lastMuscle);
             Updater u = new Updater("GENERAL",userToUpdate);
             u.execute();
-//            try {
-////                userToUpdate.updateUser();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            } catch (URISyntaxException e) {
-//                e.printStackTrace();
-//            }
-
             //Sleep
             if (health_data>120){
                 try {
@@ -83,6 +83,9 @@ public class bgService extends IntentService{
                     e.printStackTrace();
                 }
             }
+
+            NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.notify(0, mBuilder.build());
         }
     }
 }
