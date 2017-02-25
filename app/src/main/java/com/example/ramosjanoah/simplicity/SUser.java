@@ -46,6 +46,8 @@ public class SUser {
     public static final int MIN_MUSCLE = 0;
     public static final int MAX_MUSCLE = 100;
     public static final String DEFAULT_PHOTO = "TBD";
+    public static final String DEFAULT_EMAIL = "guest@guest.com";
+
 
     public SUser() {
         email = null;

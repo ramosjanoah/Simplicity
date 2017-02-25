@@ -50,6 +50,13 @@ public class Fragment2 extends Fragment implements SensorEventListener {
     private ProgressBar progressBar;
     public static final String USER_PREFERENCE = "User_Reference";
 
+    private String lastFullname;
+    private String lastNationality;
+    private int lastHealth;
+    private int lastMuscle;
+    private String lastEmail;
+    private String lastPhoto;
+    private SUser userToUpdate;
 
 
     private OnFragmentInteractionListener mListener;
@@ -156,6 +163,13 @@ public class Fragment2 extends Fragment implements SensorEventListener {
             MuscleTextView.setText(Integer.toString(sp.getInt("USER_MUSCLE",-1)));
             System.out.println(sp.getInt("USER_MUSCLE",-1));
         }
+        lastFullname = sp.getString("USER_FULLNAME",SUser.DEFAULT_FULLNAME);
+        lastNationality = sp.getString("USER_NATIONALITY",SUser.DEFAULT_NATIONALITY);
+        lastEmail = sp.getString("USER_EMAIL",SUser.DEFAULT_EMAIL);
+        lastHealth = sp.getInt("USER_HEALTH", SUser.DEFAULT_HEALTH);
+        lastHealth = sp.getInt("USER_MUSCLE", SUser.DEFAULT_MUSCLE);
+        userToUpdate = new SUser(lastEmail, lastFullname, lastNationality, lastHealth, lastMuscle);
+
     }
 
     @Override

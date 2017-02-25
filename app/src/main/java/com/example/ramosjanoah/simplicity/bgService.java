@@ -11,6 +11,14 @@ import android.provider.Settings;
  */
 
 public class bgService extends IntentService{
+    private String lastFullname;
+    private String lastNationality;
+    private int lastHealth;
+    private int lastMuscle;
+    private String lastEmail;
+    private String lastPhoto;
+    private SUser userToUpdate;
+
 
     public bgService(){
         super("bgService");
@@ -27,6 +35,16 @@ public class bgService extends IntentService{
             spEditor.putInt("USER_HEALTH", health_data);
             spEditor.commit();
             System.out.println(sp.getInt("USER_HEALTH", -1));
+
+            //Update Database
+            lastFullname = sp.getString("USER_FULLNAME",SUser.DEFAULT_FULLNAME);
+            lastNationality = sp.getString("USER_NATIONALITY",SUser.DEFAULT_NATIONALITY);
+            lastEmail = sp.getString("USER_EMAIL",SUser.DEFAULT_EMAIL);
+            lastHealth = sp.getInt("USER_HEALTH", SUser.DEFAULT_HEALTH);
+            lastHealth = sp.getInt("USER_MUSCLE", SUser.DEFAULT_MUSCLE);
+            userToUpdate = new SUser(lastEmail, lastFullname, lastNationality, lastHealth, lastMuscle);
+
+            //Sleep
             if (health_data>120){
                 try {
                     Thread.sleep(100);
