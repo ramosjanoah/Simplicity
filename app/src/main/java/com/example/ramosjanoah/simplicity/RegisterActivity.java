@@ -44,7 +44,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
-    private TextView TextNationality;
+    private EditText editTextNationality;
 
     private TextView AlreadyRegister;
     private ProgressDialog progressDialog;
@@ -70,7 +70,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
         editTextEmail = (EditText) findViewById(R.id.EmailTextFieldRegister);
         editTextPassword = (EditText) findViewById(R.id.PasswordTextField);
         editTextConfirmPassword = (EditText) findViewById(R.id.ConfirmPassword);
-        TextNationality = (TextView) findViewById(R.id.Nationality);
+        editTextNationality = (EditText) findViewById(R.id.Nationality);
         AlreadyRegister = (TextView) findViewById(R.id.AlreadyRegister);
 
         buttonRegister.setOnClickListener(this);
@@ -136,7 +136,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
                             if (task.isSuccessful()) {
                                 System.out.println("xxxxx3");
                                 UserToRegister = new SUser(email,
-                                        TextNationality.getText().toString());
+                                        editTextNationality.getText().toString());
                                 System.out.println("xxxxx4");
                                 // Register!
                                 RegisterProfile register = new RegisterProfile();
@@ -216,7 +216,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
                 if (addresses != null) {
                     if (addresses.size() > 0) {
                         String cityName = addresses.get(0).getCountryName();
-                        TextNationality.setText(cityName);
+                        editTextNationality.setText(cityName);
                     }
                 }
             } catch (IOException e) {

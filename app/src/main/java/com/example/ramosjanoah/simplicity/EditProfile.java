@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,12 +17,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Locale;
 
-public class EditProfile extends AppCompatActivity implements View.OnClickListener {
+public class EditProfile extends AppCompatActivity implements View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private EditText editTextName;
     private EditText editTextEmail;
@@ -39,6 +49,10 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     private String lastEmail;
     private String lastPhoto;
     private ProgressDialog progressDialog;
+
+    private GoogleApiClient mGoogleApiClient;
+    private Location mCurrentLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +76,15 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             editTextName.setText("Fullname Not Found");
             editTextNationality.setText("Nationality Not Found");
         }
+
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
 
         buttonSaveProfile = (Button) findViewById(R.id.buttonSaveEdit);
         buttonSaveProfile.setOnClickListener(this);
@@ -141,4 +164,55 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
         }
     }
+
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        System.out.println("On Connected");
+        Location lastLocation = LocationServices.FusedLocationApi
+                .getLastLocation(mGoogleApiClient);
+
+        if (lastLocation != null) {
+            double latitude = lastLocation.getLatitude();
+            double longitude = lastLocation.getLongitude();
+
+            System.out.println(latitude);
+            System.out.println(longitude);
+
+
+            Geocoder gcd = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses;
+            try {
+                addresses = gcd.getFromLocation(latitude, longitude, 1);
+                if (addresses != null) {
+                    if (addresses.size() > 0) {
+                        String cityName = addresses.get(0).getCountryName();
+                        editTextNationality.setText(cityName);
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("Error get location");
+                e.printStackTrace();
+            }
+        }
+    }
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        System.out.println("Connection Failed");
+    }
+    @Override
+    public void onConnectionSuspended(int arg0) {
+        System.out.println("Connection Suspended");
+        mGoogleApiClient.connect();
+    }
+
 }

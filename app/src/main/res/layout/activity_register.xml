@@ -41,7 +41,6 @@
         android:text="Already register? Log in here"
         android:textColor="#45320d"
         android:fontFamily="serif"
-        android:ems="10"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,6 +48,19 @@
         android:id="@+id/AlreadyRegister"
         android:layout_below="@+id/RegisterButtonRegister"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/Nationality"
+        android:hint="Nationality"
+        android:gravity="center"
+        android:fontFamily="serif"
+        android:layout_below="@+id/ConfirmPassword"
+        android:layout_alignLeft="@+id/ConfirmPassword"
+        android:layout_alignStart="@+id/ConfirmPassword"
+        android:editable="false"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -86,19 +98,6 @@
         android:onClick="goRegister (LoginActivity)"
         android:layout_marginTop="27dp"
         android:layout_below="@+id/Nationality"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Nationality"
-        android:hint="Nationality"
-        android:gravity="center"
-        android:text="Detecting Location.."
-        android:textSize="12pt"
-        android:textStyle="bold"
-        android:fontFamily="serif"
-        android:layout_below="@+id/ConfirmPassword"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
