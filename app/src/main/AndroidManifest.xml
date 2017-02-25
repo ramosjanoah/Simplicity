@@ -32,12 +32,12 @@
         <activity
             android:name=".ImgActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".EditProfile" />
 
+        <activity android:name=".EditProfile"></activity>
         <service
-            android:name=".DecrementService"
-            android:enabled="true"
-            android:exported="true"></service>
+            android:name=".bgService"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

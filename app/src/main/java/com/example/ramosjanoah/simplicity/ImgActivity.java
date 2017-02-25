@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -32,12 +36,19 @@ import java.util.Locale;
  */
 
 public class ImgActivity extends AppCompatActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+        SensorEventListener {
     private Button galleryBtn;
     private ImageView imageView;
     private TextView locTxt;
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
+    private TextView testStep;
+
+
+    private SensorManager mSensorManager;
+    private Sensor mSensor;
+    private boolean isSensorPresent = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("Creating Img Test");
@@ -45,6 +56,7 @@ public class ImgActivity extends AppCompatActivity implements
         setContentView(R.layout.img_test);
 
         locTxt = (TextView) findViewById(R.id.testLocation);
+        testStep = (TextView) findViewById(R.id.testStep);
 
 
 // Create an instance of GoogleAPIClient.
@@ -61,28 +73,6 @@ public class ImgActivity extends AppCompatActivity implements
 //        String locationProvider = LocationManager.NETWORK_PROVIDER;
 //        Location location = locationManager.getLastKnownLocation(locationProvider);
 //
-//        //GeoCoder
-//        double lat = location.getLatitude();
-//        double lng = location.getLongitude();
-//
-//        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
-//        StringBuilder builder = new StringBuilder();
-//        try {
-//            List<Address> address = geoCoder.getFromLocation(lat, lng, 1);
-//            int maxLines = address.get(0).getMaxAddressLineIndex();
-//            for (int i = 0; i < maxLines; i++) {
-//                String addressStr = address.get(0).getAddressLine(i);
-//                builder.append(addressStr);
-//                builder.append(" ");
-//            }
-//            String fnialAddress = builder.toString(); //This is the complete address.
-//            locTxt.setText(fnialAddress); //This will display the final address.
-//        } catch (IOException e) {
-//            // Handle IOException
-//        } catch (NullPointerException e) {
-//            // Handle NullPointerException
-//        }
-//        //End Geocoder
         galleryBtn = (Button) findViewById(R.id.testGallery);
         galleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,14 +81,58 @@ public class ImgActivity extends AppCompatActivity implements
 //                intent.setType("image/*");
 //                intent.setAction(Intent.ACTION_GET_CONTENT);
 //                startActivityForResult(Intent.createChooser(intent, "Select Picture"), RESULT_LOAD_IMAGE);
-
                 Intent i = new Intent(
                         Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
                 startActivityForResult(i, 12);
             }
         });
+
+        mSensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+        if(mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null){
+            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+            isSensorPresent = true;
+        }else{
+            isSensorPresent = false;
+        }
     }
+
+    //Sensor
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isSensorPresent)
+        {
+            mSensorManager.registerListener(this, mSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(isSensorPresent)
+        {
+            mSensorManager.unregisterListener(this);
+        }
+    }
+    @Override
+    public void onAccuracyChanged(Sensor s,int n) {
+        System.out.println("Acc changed");
+    }
+
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        testStep.setText(String.valueOf(event.values[0]));
+
+    }
+
+
+
+    //EndSensor
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

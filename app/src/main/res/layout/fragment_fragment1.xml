@@ -40,17 +40,6 @@
             android:layout_marginEnd="124dp" />
 
         <TextView
-        android:text="Fullname"
-            android:fontFamily="serif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:id="@+id/FullnameTextView"
-            android:layout_below="@+id/UidTextView"
-            android:layout_alignLeft="@+id/UidTextView"
-            android:layout_alignStart="@+id/UidTextView" />
-
-        <TextView
             android:text="Email"
             android:fontFamily="serif"
             android:layout_width="wrap_content"
@@ -89,10 +78,10 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             app:srcCompat="@drawable/no_ava"
-            android:layout_marginLeft="29dp"
-            android:layout_marginStart="29dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginStart="35dp"
             android:id="@+id/imageView"
-            android:layout_alignTop="@+id/UidTextView"
+            android:layout_above="@+id/buttonPicture"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -108,5 +97,15 @@
             android:layout_below="@+id/NationalityTextView"
             android:layout_alignRight="@+id/NationalityTextView"
             android:layout_alignEnd="@+id/NationalityTextView" />
+
+        <TextView
+        android:text="Fullname"
+            android:fontFamily="serif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            android:id="@+id/FullnameTextView"
+            android:layout_alignTop="@+id/UidTextView"
+            android:layout_alignLeft="@+id/UidTextView"
+            android:layout_alignStart="@+id/UidTextView" />
     </RelativeLayout>
 </FrameLayout>

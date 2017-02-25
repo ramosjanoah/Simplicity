@@ -6,17 +6,6 @@
     android:background="@drawable/bg5"
     android:padding="20dp">
 
-    <fragment
-        class="com.example.ramosjanoah.simplicity.Fragment1"
-        android:id="@+id/fragment1"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        tools:layout="@layout/fragment_fragment1"
-        android:layout_marginTop="35dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <Button
         android:text="Log Out"
         android:textColor="#FFFFFF"
@@ -36,6 +25,17 @@
         android:layout_above="@+id/ButtonLogOut"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="76dp" />
+        android:layout_marginBottom="73dp" />
+
+    <fragment
+        class="com.example.ramosjanoah.simplicity.Fragment1"
+        android:id="@+id/fragment1"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        tools:layout="@layout/fragment_fragment1"
+        android:layout_marginTop="68dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
