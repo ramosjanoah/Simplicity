@@ -238,7 +238,7 @@ public class SUser {
         ContentValues values = new ContentValues();
         values.put("email",this.email);
         values.put("fullname",fullname);
-        values.put("health",muscle);
+        values.put("health",health);
         values.put("muscle",muscle);
         values.put("nationality",nationality);
         values.put("photo",photo);

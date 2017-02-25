@@ -21,6 +21,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import static android.R.attr.type;
 import static android.content.Context.SENSOR_SERVICE;
 import static com.example.ramosjanoah.simplicity.R.id.testStep;
@@ -163,13 +168,6 @@ public class Fragment2 extends Fragment implements SensorEventListener {
             MuscleTextView.setText(Integer.toString(sp.getInt("USER_MUSCLE",-1)));
             System.out.println(sp.getInt("USER_MUSCLE",-1));
         }
-        lastFullname = sp.getString("USER_FULLNAME",SUser.DEFAULT_FULLNAME);
-        lastNationality = sp.getString("USER_NATIONALITY",SUser.DEFAULT_NATIONALITY);
-        lastEmail = sp.getString("USER_EMAIL",SUser.DEFAULT_EMAIL);
-        lastHealth = sp.getInt("USER_HEALTH", SUser.DEFAULT_HEALTH);
-        lastHealth = sp.getInt("USER_MUSCLE", SUser.DEFAULT_MUSCLE);
-        userToUpdate = new SUser(lastEmail, lastFullname, lastNationality, lastHealth, lastMuscle);
-
     }
 
     @Override
