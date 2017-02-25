@@ -16,14 +16,20 @@ import java.net.URISyntaxException;
 
 public class Updater extends AsyncTask<String, String, String>{
     SUser userToUpdate;
-
-    public Updater(SUser input){
+    String updateType;
+    public Updater(String type,SUser input){
+        updateType = type;
         userToUpdate = input;
     }
+
     @Override
     protected String doInBackground(String... strings) {
         try {
-            userToUpdate.updateUser();
+            if (updateType.equals("GENERAL")) {
+                userToUpdate.updateUser();
+            }else if (updateType.equals("PHOTO")){
+                userToUpdate.updatePhoto();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

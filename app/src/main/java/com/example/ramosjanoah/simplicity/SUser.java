@@ -265,6 +265,47 @@ public class SUser {
         //out.close();
     }
 
+    public void updatePhoto() throws IOException, JSONException, URISyntaxException {
+        String urllink = "https://ramosjanoah.herokuapp.com/update.php";
+        URL url = new URL(urllink);
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        conn.setReadTimeout(10000);
+        conn.setConnectTimeout(15000);
+
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+        conn.setDoInput(true);
+
+        //conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+
+        //List<NameValuePair> params = new ArrayList<NameValuePair>();
+        ContentValues values = new ContentValues();
+        values.put("email",this.email);
+        values.put("photo",this.photo);
+
+        OutputStream os = conn.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getQuery(values));
+        writer.flush();
+        writer.close();
+        int response = conn.getResponseCode();
+        System.out.println("2 AZU : " + response);
+        os.close();
+        //response = conn.getResponseCode();
+        conn.connect();
+
+        //String postParameters = "&email=" + email + "&fullname=" + fullname +
+        //        "&health=" + health + "&muscle=" + muscle + "&nationality=" + nationality + "&photo=" + photo;
+        //System.out.println(postParameters);
+
+        //conn.setFixedLengthStreamingMode(postParameters.getBytes().length);
+        //PrintWriter out = new PrintWriter(conn.getOutputStream());
+        //out.print(postParameters);
+
+        //out.close();
+    }
+
+
     private String getQuery(ContentValues values) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;

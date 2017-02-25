@@ -5,17 +5,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
 
 import static android.app.Activity.RESULT_OK;
 import static android.view.View.Y;
@@ -47,6 +51,7 @@ public class Fragment1 extends Fragment {
     private Button buttonChangePhoto;
     private Button buttonEditProfile;
     public static final String USER_PREFERENCE = "User_Reference";
+    private SharedPreferences sp;
 
     private OnFragmentInteractionListener mListener;
 
@@ -78,7 +83,7 @@ public class Fragment1 extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+        sp = getActivity().getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
     }
 
     @Override
@@ -101,6 +106,12 @@ public class Fragment1 extends Fragment {
             TextViewEmail.setText("Email Not Found");
             TextViewFullname.setText("Fullname Not Found");
             TextViewNationality.setText("Nationality Not Found");
+        }
+        if (!sp.getString("USER_PHOTO", "TBD").equals("TBD")){
+            String previouslyEncodedImage = sp.getString("USER_PHOTO", "TBD");
+            byte[] b = Base64.decode(previouslyEncodedImage, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+            PhotoProfile.setImageBitmap(bitmap);
         }
         buttonChangePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +151,23 @@ public class Fragment1 extends Fragment {
 
             PhotoProfile.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
+            Bitmap b = BitmapFactory.decodeFile(picturePath);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            b.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            byte[] img = bos.toByteArray();
+            String encodedImage = Base64.encodeToString(img, Base64.DEFAULT);
+
+            SharedPreferences.Editor spEditor = sp.edit();
+            spEditor.putString("USER_PHOTO",encodedImage);
+            spEditor.commit();
+
+//            SUser userToUpdate= new SUser();
+//            userToUpdate.setEmail(sp.getString("USER_EMAIL",SUser.DEFAULT_EMAIL));
+//            userToUpdate.setPhoto(encodedImage);
+//
+//            System.out.println("Photos Frag 1:" + encodedImage);
+//            Updater u = new Updater("PHOTO",userToUpdate);
+//            u.execute();
         }
     }
 

@@ -57,7 +57,7 @@ public class bgService extends IntentService{
 
             userToUpdate.setHealth(lastHealth);
             userToUpdate.setMuscle(lastMuscle);
-            Updater u = new Updater(userToUpdate);
+            Updater u = new Updater("GENERAL",userToUpdate);
             u.execute();
 //            try {
 ////                userToUpdate.updateUser();
