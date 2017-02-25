@@ -1,5 +1,6 @@
 package com.example.ramosjanoah.simplicity;
 
+import android.content.ContentValues;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 
@@ -7,13 +8,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.SQLOutput;
+import java.util.Map;
+//import org.apache.http;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Created by ramosjanoah on 2/22/2017.
@@ -27,15 +37,15 @@ public class SUser {
     private int muscle;
     private static String photo;
 
-    private static final String DEFAULT_FULLNAME = "Guest";
-    private static final String DEFAULT_NATIONALITY = "Indonesia";
-    private static final int DEFAULT_HEALTH = 50;
-    private static final int MIN_HEALTH = 0;
-    private static final int MAX_HEALTH = 100;
-    private static final int DEFAULT_MUSCLE = 50;
-    private static final int MIN_MUSCLE = 0;
-    private static final int MAX_MUSCLE = 100;
-    private static final String DEFAULT_PHOTO = "TBD";
+    public static final String DEFAULT_FULLNAME = "Guest";
+    public static final String DEFAULT_NATIONALITY = "Indonesia";
+    public static final int DEFAULT_HEALTH = 50;
+    public static final int MIN_HEALTH = 0;
+    public static final int MAX_HEALTH = 100;
+    public static final int DEFAULT_MUSCLE = 50;
+    public static final int MIN_MUSCLE = 0;
+    public static final int MAX_MUSCLE = 100;
+    public static final String DEFAULT_PHOTO = "TBD";
 
     public SUser() {
         email = null;
@@ -66,7 +76,16 @@ public class SUser {
         photo = DEFAULT_PHOTO;
     }
 
-    public SUser(String email, String fullname, String UID, String nationality, int health, int muscle) {
+    public SUser(String email, String nationality) {
+        this.email = email;
+        fullname = DEFAULT_FULLNAME;
+        this.nationality = nationality;
+        health = DEFAULT_HEALTH;
+        muscle = DEFAULT_MUSCLE;
+        photo = DEFAULT_PHOTO;
+    }
+
+    public SUser(String email, String fullname, String nationality, int health, int muscle) {
         this.email = email;
         this.fullname = fullname;
         this.nationality = nationality;
@@ -157,41 +176,109 @@ public class SUser {
 
     public void writeUser() throws IOException, JSONException, URISyntaxException {
         String urllink = "https://ramosjanoah.herokuapp.com/insert.php";
+        //photo = "TBD";
         URL url = new URL(urllink);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setDoOutput(true);
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-        String postParameters = "&email="+email+"&fullname="+fullname+
-                "&health="+health+"&muscle="+muscle+"&nationality="+nationality+"&photo="+photo;
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        conn.setReadTimeout(10000);
+        conn.setConnectTimeout(15000);
 
-        conn.setFixedLengthStreamingMode(postParameters.getBytes().length);
-        PrintWriter out = new PrintWriter(conn.getOutputStream());
-        out.print(postParameters);
-        out.close();
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+        conn.setDoInput(true);
+
+        //conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+
+        //List<NameValuePair> params = new ArrayList<NameValuePair>();
+        ContentValues values = new ContentValues();
+        values.put("email",this.email);
+        values.put("fullname",fullname);
+        values.put("health",muscle);
+        values.put("muscle",muscle);
+        values.put("nationality",nationality);
+        values.put("photo",photo);
+
+        OutputStream os = conn.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getQuery(values));
+        writer.flush();
+        writer.close();
+        int response = conn.getResponseCode();
+        System.out.println("COLOR SEKOP : " + response);
+        os.close();
+        //response = conn.getResponseCode();
+        conn.connect();
+
+        //String postParameters = "&email=" + email + "&fullname=" + fullname +
+        //        "&health=" + health + "&muscle=" + muscle + "&nationality=" + nationality + "&photo=" + photo;
+        //System.out.println(postParameters);
+
+        //conn.setFixedLengthStreamingMode(postParameters.getBytes().length);
+        //PrintWriter out = new PrintWriter(conn.getOutputStream());
+        //out.print(postParameters);
+
+        //out.close();
     }
 
     public void updateUser() throws IOException, JSONException, URISyntaxException {
         String urllink = "https://ramosjanoah.herokuapp.com/update.php";
         URL url = new URL(urllink);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setDoOutput(true);
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-        String postParameters = "&email="+email+"&fullname="+fullname+
-                "&health="+health+"&muscle="+muscle+"&nationality="+nationality+"&photo="+photo;
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        conn.setReadTimeout(10000);
+        conn.setConnectTimeout(15000);
 
-        conn.setFixedLengthStreamingMode(postParameters.getBytes().length);
-        PrintWriter out = new PrintWriter(conn.getOutputStream());
-        out.print(postParameters);
-        out.close();
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+        conn.setDoInput(true);
+
+        //conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+
+        //List<NameValuePair> params = new ArrayList<NameValuePair>();
+        ContentValues values = new ContentValues();
+        values.put("email",this.email);
+        values.put("fullname",fullname);
+        values.put("health",muscle);
+        values.put("muscle",muscle);
+        values.put("nationality",nationality);
+        values.put("photo",photo);
+
+        OutputStream os = conn.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getQuery(values));
+        writer.flush();
+        writer.close();
+        int response = conn.getResponseCode();
+        System.out.println("2 PADUNG : " + response);
+        os.close();
+        //response = conn.getResponseCode();
+        conn.connect();
+
+        //String postParameters = "&email=" + email + "&fullname=" + fullname +
+        //        "&health=" + health + "&muscle=" + muscle + "&nationality=" + nationality + "&photo=" + photo;
+        //System.out.println(postParameters);
+
+        //conn.setFixedLengthStreamingMode(postParameters.getBytes().length);
+        //PrintWriter out = new PrintWriter(conn.getOutputStream());
+        //out.print(postParameters);
+
+        //out.close();
     }
 
-    public void printUserInformation() {
-        System.out.println(this.email +
-                " " + this.fullname +
-                " " + this.nationality +
-                " " + this.health +
-                " " + this.muscle);
+    private String getQuery(ContentValues values) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        for (Map.Entry<String, Object> entry : values.valueSet()) {
+            if (first)
+                first = false;
+            else
+                result.append("&");
+                result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+                result.append("=");
+                result.append(URLEncoder.encode(String.valueOf(entry.getValue()), "UTF-8"));
+        }
+
+        //Log.i("Result", result.toString() + " " + String.valueOf(response));
+        System.out.println(result.toString());
+        return result.toString();
     }
 }

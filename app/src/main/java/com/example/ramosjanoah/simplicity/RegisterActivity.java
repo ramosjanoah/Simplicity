@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * Created by ramosjanoah on 2/18/2017.
@@ -34,11 +35,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
+    private EditText editTextNationality;
 
     private TextView AlreadyRegister;
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
+    private SUser UserToRegister;
 
 
     @Override
@@ -56,6 +59,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         editTextEmail = (EditText) findViewById(R.id.EmailTextFieldRegister);
         editTextPassword = (EditText) findViewById(R.id.PasswordTextField);
         editTextConfirmPassword = (EditText) findViewById(R.id.ConfirmPassword);
+        editTextNationality = (EditText) findViewById(R.id.Nationality);
         AlreadyRegister = (TextView) findViewById(R.id.AlreadyRegister);
 
         buttonRegister.setOnClickListener(this);
@@ -79,7 +83,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     }
 
     public void registerUser() {
-        String email = editTextEmail.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         String confirmPassword = editTextConfirmPassword.getText().toString().trim();
         System.out.println("xxxxx1");
@@ -89,52 +93,58 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
             // Kalo email kosong?
             Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT);
             return;
-        }
-
-        if (TextUtils.isEmpty(password)) {
+        } else if (TextUtils.isEmpty(password)) {
             // Kalo password kosong?
             Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT);
             return;
-        }
-
-        if (!(confirmPassword.equals(password))) {
+        } else if (!(confirmPassword.equals(password))) {
             // Kalo confirm password gagal
             Toast.makeText(this, "Please confirm your password correcty", Toast.LENGTH_SHORT);
             return;
+        } else {
+            System.out.println("xxxxx2");
+
+            progressDialog.setMessage("Registering User...");
+            progressDialog.show();
+
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            // Kalau register sukses
+                            if (task.isSuccessful()) {
+                                System.out.println("xxxxx3");
+                                UserToRegister = new SUser(email,
+                                        editTextNationality.getText().toString());
+                                System.out.println("xxxxx4");
+                                // Register!
+                                RegisterProfile register = new RegisterProfile();
+                                register.execute();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Register failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            progressDialog.hide();
+                        }
+
+                    });
         }
-
-        System.out.println("xxxxx2");
-
-        progressDialog.setMessage("Registering User...");
-        progressDialog.show();
-
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        // Kalau register sukses
-                        if (task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, "Register success. Log in to continue.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(RegisterActivity.this, "Register failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        progressDialog.hide();
-                    }
-
-                });
     }
-    /*
-    public class GetProfile extends AsyncTask<String, String, String> {
+
+    public class RegisterProfile extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
             try {
-
+                UserToRegister.writeUser();
+//                UserLogin = new SUser(firebaseAuth.getCurrentUser().getEmail());
+//                UserLogin.printUserInformation();
+//                UserLogin.getUserProfile();
+//                UserLogin.printUserInformation();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
             return null;
@@ -142,13 +152,15 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
 
         @Override
         protected void onPreExecute() {
-            progressDialog.setTitle("Loading user profile..");
-            progressDialog.show();
+
         }
 
         @Override
         protected void onPostExecute(String s) {
-            progressDialog.hide();
-            printUserProfile();
-        }*/
+            // Save to SharedPreference
+            progressDialog.dismiss();
+            Toast.makeText(RegisterActivity.this, "Register success.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
 }

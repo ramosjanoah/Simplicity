@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener { //implements SensorEventListener{
 
@@ -78,9 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public void goHome() {
-        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-    }
+
 
     public void goImageTest(View view) {
         Intent toGalleryScreen = new Intent(this, ImgActivity.class);
@@ -122,19 +121,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             GetProfile g = new GetProfile();
                             g.execute();
-                            finish();
-                            goHome();
                         } else {
                             Toast.makeText(LoginActivity.this, "Login failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
     }
 
     public class GetProfile extends AsyncTask<String, String, String> {
@@ -142,12 +137,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         protected String doInBackground(String... strings) {
             try {
                 UserLogin = new SUser(firebaseAuth.getCurrentUser().getEmail());
-                UserLogin.printUserInformation();
                 UserLogin.getUserProfile();
-                UserLogin.printUserInformation();
+                UserLogin.writeUser();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
             return null;
@@ -160,7 +156,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected void onPostExecute(String s) {
             // Save to SharedPreference
+            progressDialog.dismiss();
             saveProfile();
+            finish();
+            goHome();
         }
     }
 
@@ -180,8 +179,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void saveProfile() {
         SharedPreferences sp = getSharedPreferences(USER_PREFERENCE, Context.MODE_PRIVATE);
         SharedPreferences.Editor spEditor = sp.edit();
-        System.out.println("Pair King :");
-        UserLogin.printUserInformation();
+        //UserLogin.printUserInformation();
         spEditor.putString("USER_EMAIL", UserLogin.getEmail());
         spEditor.putString("USER_FULLNAME", UserLogin.getFullname());
         spEditor.putInt("USER_HEALTH", UserLogin.getHealth());
@@ -193,7 +191,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onStop() {
-        //saveProfile();
         super.onStop();
+    }
+
+    public void goHome() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
     }
 }
