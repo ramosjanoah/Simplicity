@@ -71,32 +71,20 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_alignBaseline="@+id/ButtonEditProfile"
             android:layout_alignBottom="@+id/ButtonEditProfile"
+            android:layout_marginRight="7dp"
             android:layout_alignRight="@+id/imageView"
             android:layout_alignEnd="@+id/imageView" />
 
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:srcCompat="@drawable/no_ava"
+            android:src="@drawable/no_ava"
             android:layout_marginLeft="35dp"
             android:layout_marginStart="35dp"
             android:id="@+id/imageView"
             android:layout_above="@+id/buttonPicture"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ButtonEditProfile"
-            android:text="Edit Profile"
-            android:textSize="10dp"
-            android:onClick="editProfile"
-            android:textColor="#FFFFFF"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_below="@+id/NationalityTextView"
-            android:layout_alignRight="@+id/NationalityTextView"
-            android:layout_alignEnd="@+id/NationalityTextView" />
 
         <TextView
         android:text="Fullname"
@@ -107,5 +95,19 @@
             android:layout_alignTop="@+id/UidTextView"
             android:layout_alignLeft="@+id/UidTextView"
             android:layout_alignStart="@+id/UidTextView" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ButtonEditProfile"
+            android:text="Edit Profile"
+            android:textSize="10dp"
+            android:onClick="editProfile"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="-10dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_below="@+id/NationalityTextView"
+            android:layout_alignLeft="@+id/NationalityTextView"
+            android:layout_alignStart="@+id/NationalityTextView" />
     </RelativeLayout>
 </FrameLayout>
