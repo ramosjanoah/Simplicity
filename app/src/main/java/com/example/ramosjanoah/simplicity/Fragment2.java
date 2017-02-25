@@ -55,14 +55,6 @@ public class Fragment2 extends Fragment implements SensorEventListener {
     private ProgressBar progressBar;
     public static final String USER_PREFERENCE = "User_Reference";
 
-    private String lastFullname;
-    private String lastNationality;
-    private int lastHealth;
-    private int lastMuscle;
-    private String lastEmail;
-    private String lastPhoto;
-    private SUser userToUpdate;
-
 
     private OnFragmentInteractionListener mListener;
 
