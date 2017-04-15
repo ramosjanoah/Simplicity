@@ -176,7 +176,7 @@ public class SUser {
         email = obj.getString("email");
     }
 
-    public void writeUser() throws IOException, JSONException, URISyntaxException {
+    public void writeUser(String password) throws IOException, JSONException, URISyntaxException {
         String urllink = "https://ramosjanoah.herokuapp.com/insert.php";
         //photo = "TBD";
         URL url = new URL(urllink);
@@ -198,6 +198,7 @@ public class SUser {
         values.put("muscle",muscle);
         values.put("nationality",nationality);
         values.put("photo",photo);
+        values.put("password", password);
 
         OutputStream os = conn.getOutputStream();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -213,6 +214,7 @@ public class SUser {
         //String postParameters = "&email=" + email + "&fullname=" + fullname +
         //        "&health=" + health + "&muscle=" + muscle + "&nationality=" + nationality + "&photo=" + photo;
         //System.out.println(postParameters);
+
 
         //conn.setFixedLengthStreamingMode(postParameters.getBytes().length);
         //PrintWriter out = new PrintWriter(conn.getOutputStream());

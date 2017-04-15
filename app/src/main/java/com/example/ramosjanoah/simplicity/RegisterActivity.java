@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
@@ -11,6 +12,7 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -38,13 +40,14 @@ import java.util.Locale;
  * Created by ramosjanoah on 2/18/2017.
  */
 public class RegisterActivity extends Activity implements View.OnClickListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
     private EditText editTextNationality;
+
 
     private TextView AlreadyRegister;
     private ProgressDialog progressDialog;
@@ -53,7 +56,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
     private SUser UserToRegister;
 
     private GoogleApiClient mGoogleApiClient;
-
+    private String PasswordForAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
         setContentView(R.layout.activity_register);
 
         Configuration configInfo = getResources().getConfiguration();
-        if(configInfo.orientation == Configuration.ORIENTATION_LANDSCAPE){
+        if (configInfo.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
 
@@ -108,7 +111,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
         String password = editTextPassword.getText().toString().trim();
         String confirmPassword = editTextConfirmPassword.getText().toString().trim();
         System.out.println("xxxxx1");
-        System.out.println(email + ", " + password + ", " + confirmPassword );
+        System.out.println(email + ", " + password + ", " + confirmPassword);
 
         if (TextUtils.isEmpty(email)) {
             // Kalo email kosong?
@@ -127,17 +130,15 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
 
             progressDialog.setMessage("Registering User...");
             progressDialog.show();
-
+            PasswordForAPI = password;
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             // Kalau register sukses
                             if (task.isSuccessful()) {
-                                System.out.println("xxxxx3");
                                 UserToRegister = new SUser(email,
                                         editTextNationality.getText().toString());
-                                System.out.println("xxxxx4");
                                 // Register!
                                 RegisterProfile register = new RegisterProfile();
                                 register.execute();
@@ -156,7 +157,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
         @Override
         protected String doInBackground(String... strings) {
             try {
-                UserToRegister.writeUser();
+                UserToRegister.writeUser(PasswordForAPI);
+//                UserToRegister.writeUserToAPI(PasswordForAPI);
 //                UserLogin = new SUser(firebaseAuth.getCurrentUser().getEmail());
 //                UserLogin.printUserInformation();
 //                UserLogin.getUserProfile();
@@ -173,15 +175,15 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
 
         @Override
         protected void onPreExecute() {
-
+            progressDialog.dismiss();
+            Toast.makeText(RegisterActivity.this, "Register success.",
+                    Toast.LENGTH_SHORT).show();
         }
 
         @Override
         protected void onPostExecute(String s) {
             // Save to SharedPreference
-            progressDialog.dismiss();
-            Toast.makeText(RegisterActivity.this, "Register success.",
-                    Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -198,6 +200,16 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
     @Override
     public void onConnected(Bundle connectionHint) {
         System.out.println("On Connected");
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         Location lastLocation = LocationServices.FusedLocationApi
                 .getLastLocation(mGoogleApiClient);
 

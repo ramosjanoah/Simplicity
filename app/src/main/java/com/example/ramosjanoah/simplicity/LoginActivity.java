@@ -138,12 +138,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             try {
                 UserLogin = new SUser(firebaseAuth.getCurrentUser().getEmail());
                 UserLogin.getUserProfile();
-                UserLogin.writeUser();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
             return null;
